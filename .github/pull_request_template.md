@@ -1,10 +1,10 @@
-# Descrição da Mudança *
+# Descrição da Mudança
 
 Descreva as alterações que você fez.
 
-## Tipo de mudança
+> Adicione um `[x]` nas caixas que se aplicam a esta solicitação de pull request.
 
-Exclua as opções que não são relevantes.
+## Tipo de mudança
 
 - [ ] Bug fix (alteração que corrige um problema)
 - [ ] Nova feature (mudança que adiciona funcionalidade)
