@@ -1,6 +1,7 @@
 # base-repo
 
 Repositorio base para meu projeto, manter padronização de licensa e criação de inssues
+Para manter padrão a criação de issue, pull request e documentação do repositorio
 
 ## Links úteis
 
