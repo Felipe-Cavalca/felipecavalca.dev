@@ -1,0 +1,82 @@
+name: Tag on merge
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  create_tag_and_draft_release:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            if (context.payload.pull_request.merged) {
+              const { owner, repo } = context.repo
+              const prNumber = context.payload.pull_request.number
+              const labels = (await github.issues.listLabelsOnIssue({ owner, repo, issue_number: prNumber })).data.map(label => label.name)
+
+              const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop()
+              const baseString = lastTag.match(/[\d.]+$/)[0]
+              const prefix = lastTag.replace(baseString, '')
+              const parts = baseString.split('.').map(Number)
+
+              if (labels.includes('enhancement')) {
+                parts[1] += 1
+                parts[2] = 0
+              } else if (labels.includes('bug') || labels.includes('documentation')) {
+                parts[2] += 1
+              } else {
+                return
+              }
+
+              const newTag = `${prefix}${parts.join('.')}`
+              const tagRef = await github.git.createRef({
+                owner,
+                repo,
+                ref: `refs/tags/${newTag}`,
+                sha: context.payload.pull_request.merge_commit_sha,
+              })
+            }
+
+  update_release_draft:
+    needs: create_tag_and_draft_release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish_release:
+    needs: update_release_draft
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish Release
+        uses: actions/github-script@v3
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const { owner, repo } = context.repo
+            const releases = await github.repos.listReleases({
+              owner,
+              repo,
+            })
+            const draftRelease = releases.data.find(release => release.draft) // Encontra a release mais recente que é um rascunho
+            if (draftRelease) {
+              await github.repos.updateRelease({
+                owner,
+                repo,
+                release_id: draftRelease.id,
+                draft: false, // Remove o status de rascunho
+              })
+            }
