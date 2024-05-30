@@ -32,7 +32,7 @@ jobs:
               const parts = baseString.split('.').map(Number)
 
               // Extract the number from the parentheses in the last tag
-              const lastTagNumber = parseInt(lastTag.match(/\((\d+)\)$/)?.[1])
+              const lastTagNumber = parseInt(lastTag.match(/-(\d+)$/)?.[1])
               const newTagNumber = isNaN(lastTagNumber) ? 1 : lastTagNumber + 1
 
               // validates if the PR has the labels 'upgrade'
@@ -53,7 +53,7 @@ jobs:
                 return;
               }
 
-              const newTag = `${prefix}${parts.join('.')} (${newTagNumber})`
+              const newTag = `${prefix}${parts.join('.')}-${newTagNumber}`
               const tagRef = await github.git.createRef({
                 owner,
                 repo,
