@@ -88,14 +88,16 @@ jobs:
               owner,
               repo,
             })
+
             const draftRelease = releases.data.find(release => release.draft)
             if (draftRelease) {
-              const newName = draftRelease.name.replace('-', ' (') + ')'
+              const { stdout: lastTag } = await require('child_process').execSync('git describe --tags --abbrev=0');
               await github.repos.updateRelease({
                 owner,
                 repo,
                 release_id: draftRelease.id,
-                name: ''
-                draft: false, // Remove o status de rascunho
+                name: lastTag.trim().replace(/-/g, ' (') + ')',
+                draft: false,
+                prerelease: true,
               })
             }
