@@ -100,6 +100,7 @@ jobs:
                 owner,
                 repo,
                 release_id: draftRelease.id,
+                tag_name: lastTag,
                 name: lastTag.trim().replace(/-/g, ' (') + ')',
                 draft: false,
                 prerelease: true,
