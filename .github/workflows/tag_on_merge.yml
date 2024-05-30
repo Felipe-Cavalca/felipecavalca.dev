@@ -78,6 +78,9 @@ jobs:
     needs: update_release_draft
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Publish Release
         uses: actions/github-script@v4
         with:
