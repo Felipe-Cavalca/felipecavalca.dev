@@ -90,10 +90,12 @@ jobs:
             })
             const draftRelease = releases.data.find(release => release.draft)
             if (draftRelease) {
+              const newName = draftRelease.name.replace('-', ' (') + ')'
               await github.repos.updateRelease({
                 owner,
                 repo,
                 release_id: draftRelease.id,
+                name: ''
                 draft: false, // Remove o status de rascunho
               })
             }
