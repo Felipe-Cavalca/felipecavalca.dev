@@ -95,7 +95,7 @@ jobs:
 
             const draftRelease = releases.data.find(release => release.draft)
             if (draftRelease) {
-              const { stdout: lastTag } = await require('child_process').execSync('git describe --tags --abbrev=0');
+              const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop()
               await github.repos.updateRelease({
                 owner,
                 repo,
