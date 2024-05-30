@@ -19,3 +19,7 @@ Para manter padrão a criação de issue, pull request e documentação do repos
 * [LICENSE](LICENSE)
 * [README.md](README.md)
 * [SECURITY.md](SECURITY.md)
+
+## Versões
+
+[https://github.com/Felipe-Cavalca/base-repo/releases](https://github.com/Felipe-Cavalca/base-repo/releases)
