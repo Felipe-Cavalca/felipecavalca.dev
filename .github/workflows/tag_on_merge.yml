@@ -27,15 +27,16 @@ jobs:
               const labels = (await github.issues.listLabelsOnIssue({ owner, repo, issue_number: prNumber })).data.map(label => label.name)
 
               const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop()
-              console.log(`Last tag: ${lastTag}`)
               const baseString = lastTag.match(/[\d.]+-\d+/)[0]
-              console.log(`Base string: ${baseString}`)
               const parts = baseString.split('-')[0].split('.').map(Number)
 
               // Extract the number from the parentheses in the last tag
               const lastTagNumber = parseInt(lastTag.match(/-(\d+)$/)?.[1])
-              console.log(`Last tag number: ${lastTagNumber}`)
               const newTagNumber = isNaN(lastTagNumber) ? 1 : lastTagNumber + 1
+
+              console.log(`Last tag: ${lastTag}`)
+              console.log(`Base string: ${baseString}`)
+              console.log(`Last tag number: ${lastTagNumber}`)
               console.log(`New tag number: ${newTagNumber}`)
 
               // validates if the PR has the labels 'upgrade'
@@ -94,7 +95,7 @@ jobs:
 
             const draftRelease = releases.data.find(release => release.draft)
             if (draftRelease) {
-              const { stdout: lastTag } = await require('child_process').execSync('git describe --tags --abbrev=0');
+              const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop()
               await github.repos.updateRelease({
                 owner,
                 repo,
