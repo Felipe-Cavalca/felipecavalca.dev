@@ -28,7 +28,7 @@ jobs:
 
               const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop()
               console.log(`Last tag: ${lastTag}`)
-              const baseString = lastTag.match(/[\d.]+/)[0]
+              const baseString = lastTag.match(/[\d.]+-\d+/)[0]
               console.log(`Base string: ${baseString}`)
               const prefix = lastTag.replace(baseString, '')
               console.log(`Prefix: ${prefix}`)
