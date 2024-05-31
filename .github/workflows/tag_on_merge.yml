@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -79,6 +84,11 @@ jobs:
     needs: update_release_draft
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
       - name: Checkout code
         uses: actions/checkout@v4
 
