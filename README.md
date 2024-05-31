@@ -1,14 +1,13 @@
 # base-repo
 
-Repositorio base para meu projeto, manter padronização de licensa e criação de inssues
-Para manter padrão a criação de issue, pull request e documentação do repositorio
+Base repository for my project to maintain standardization of licenses, inssues, actions, etc.
 
-## Links úteis
+## Useful links
 
 * `.github`
   * [ISSUE_TEMPLATES](.github/ISSUE_TEMPLATE/)
-    * [report-de-bug.md](.github/ISSUE_TEMPLATE/report-de-bug.md)
-    * [solicitação-de-melhoria.md](.github/ISSUE_TEMPLATE/solicitação-de-melhoria.md)
+    * [bug-report.md](.github/ISSUE_TEMPLATE/bug-report.md)
+  * [improvement-request.md](.github/ISSUE_TEMPLATE/enhancement-request.md)
   * [workflows](.github/workflows/)
     * [tag_on_merge.yml](.github/workflows/tag_on_merge.yml)
   * [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
@@ -20,6 +19,6 @@ Para manter padrão a criação de issue, pull request e documentação do repos
 * [README.md](README.md)
 * [SECURITY.md](SECURITY.md)
 
-## Versões
+## Versions
 
 [https://github.com/Felipe-Cavalca/base-repo/releases](https://github.com/Felipe-Cavalca/base-repo/releases)
