@@ -1,0 +1,17 @@
+name: Sync Labels
+
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  labels:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    steps:
+    - uses: actions/checkout@v2
+    - uses: micnncim/action-label-syncer@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        config_file: .github/labels.yml
