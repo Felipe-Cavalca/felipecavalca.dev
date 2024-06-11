@@ -3,6 +3,10 @@ no-changes-template: '* No changes from last release'
 include-pre-releases: false
 sort-direction: ascending
 categories:
+  - title: 'Release'
+    collapse-after: 3
+    labels:
+      - 'release'
   - title: 'Enhancement'
     collapse-after: 3
     labels:
