@@ -34,6 +34,10 @@
   color: 2c8cdb
   description: Code refactoring
 
+- name: release
+  color: 0e8a16
+  description: Create a new release
+
 - name: upgrade
   color: fbca04
   description: Updates that cause compatibility issues
