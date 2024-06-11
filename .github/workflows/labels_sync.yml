@@ -10,7 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
     steps:
-    - uses: actions/checkout@v2
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
     - uses: micnncim/action-label-syncer@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
