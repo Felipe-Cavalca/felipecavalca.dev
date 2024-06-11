@@ -30,6 +30,10 @@
   color: d876e3
   description: Further information is requested
 
+- name: refactor
+  color: 2c8cdb
+  description: Code refactoring
+
 - name: upgrade
   color: fbca04
   description: Updates that cause compatibility issues
