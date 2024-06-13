@@ -4,8 +4,13 @@
         {
             "label": "merge release from other repo",
             "type": "shell",
-            "command": "git remote add base https://github.com/Felipe-Cavalca/base-repo.git && git fetch base && git merge base/lastet-release",
-            "problemMatcher": []
+            "problemMatcher": [],
+            "windows": {
+                "command": "git remote add base https://github.com/Felipe-Cavalca/base-repo.git; if ($?) { git fetch base; if ($?) { git merge base/lastet-release } }"
+            },
+            "linux": {
+                "command": "git remote add base https://github.com/Felipe-Cavalca/base-repo.git && git fetch base && git merge base/lastet-release"
+            }
         }
     ]
 }
