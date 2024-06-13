@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "merge release from other repo",
+            "type": "shell",
+            "command": "git remote add base https://github.com/Felipe-Cavalca/base-repo.git && git fetch base && git merge base/lastet-release",
+            "problemMatcher": []
+        }
+    ]
+}
