@@ -153,8 +153,8 @@ jobs:
 
       - name: Create and push branch
         run: |
-          git checkout ${BRANCH_NAME} || git checkout -b ${BRANCH_NAME}
-          git pull origin ${BRANCH_NAME} || true
-          git push origin ${BRANCH_NAME}
+          git checkout -b ${BRANCH_NAME} || git checkout ${BRANCH_NAME}
+          git reset --hard origin/main
+          git push --force origin ${BRANCH_NAME}
         env:
-          BRANCH_NAME: lastet-release
+          BRANCH_NAME: latest-release
