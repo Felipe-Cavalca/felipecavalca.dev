@@ -61,6 +61,7 @@ jobs:
                 parts[2] = 0
               } else {
                 parts[2] += 1
+              }
             }
 
             // Criação da nova tag a partir das partes da versão e do número da tag
