@@ -55,7 +55,7 @@ jobs:
               parts[1] = 0
               parts[2] = 0
             } else {
-              if (labels.includes('enhancement') || labels.includes('dependencies') {
+              if (labels.includes('enhancement') || labels.includes('dependencies')) {
                 // Se a label 'enhancement' estiver presente, incrementa a versão minor e zera a patch
                 parts[1] += 1
                 parts[2] = 0
