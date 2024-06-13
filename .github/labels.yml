@@ -2,6 +2,10 @@
   color: d73a4a
   description: Something isn't working
 
+- name: dependencies
+  color: 0075ca
+  description: Update dependencies at the latest version
+
 - name: documentation
   color: 0075ca
   description: Improvements or additions to documentation
