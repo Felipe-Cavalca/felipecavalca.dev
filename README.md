@@ -1,28 +1,34 @@
-# base-repo
+# BifrostPHP-Front
 
-Base repository for my project to maintain standardization of licenses, inssues, actions, etc.
+> Documentation in English / Documentation in English:
+> [README-PT.md](README-PT.md)
 
-## Useful links
+This repository contains the BifrostPHP front-end source code base.
 
-* `.github`
-  * [ISSUE_TEMPLATES](.github/ISSUE_TEMPLATE/)
-    * [bug-report.md](.github/ISSUE_TEMPLATE/bug-report.md)
-    * [enhancement-request.md](.github/ISSUE_TEMPLATE/enhancement-request.md)
-  * [workflows](.github/workflows/)
-    * [tag_on_merge.yml](.github/workflows/tag_on_merge.yml)
-  * [CODE_OF_CONDUCT.md](.github/CODE_OF_CONDUCT.md)
-  * [CONTRIBUTING.md](.github/CONTRIBUTING.md)
-  * [FUNDING.yml](.github/FUNDING.yml)
-  * [labels.yml](.github/labels.yml)
-  * [PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md)
-  * [release-drafter.yml](.github/release-drafter.yml)
-* [.vscode](.vscode/)
-  * [extensions.json](.vscode/extensions.json)
-  * [tasks.json](.vscode/tasks.json)
-* [LICENSE](LICENSE)
-* [README.md](README.md)
-* [SECURITY.md](SECURITY.md)
+You can find more information about the project in the official repository on GitHub: [BifrostPHP](https://github.com/Felipe-Cavalca/BifrostPHP)
 
-## Versions
+## Installation
 
-[https://github.com/Felipe-Cavalca/base-repo/releases](https://github.com/Felipe-Cavalca/base-repo/releases)
+To run the project, you will need to have Docker and Docker Compose installed on your machine.
+
+Follow the steps below to run Docker Compose:
+
+1. Open a terminal and navigate to the project's `app` folder.
+
+2. Run the following command to build and start the Docker containers:
+
+    ```bash
+    docker-compose up -d
+    ```
+
+    This will download the images easier, build the containers and start the services.
+
+3. Once complete, you can access the app in your browser using the following URL:
+
+    ```bash
+    http://localhost:8000
+    ```
+
+## Sponsored by
+
+* @JoaoSto

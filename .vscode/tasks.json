@@ -11,6 +11,13 @@
             "linux": {
                 "command": "git remote | grep base && git remote set-url base https://github.com/Felipe-Cavalca/base-repo.git || git remote add base https://github.com/Felipe-Cavalca/base-repo.git; git fetch base && git merge base/lastet-release"
             }
+        },
+        // Scripts do front
+        {
+            "label": "front docker-compose up",
+            "type": "shell",
+            "command": "docker-compose",
+            "args": ["-f", "app/docker-compose.yml", "up", "--build", "-d"]
         }
     ]
 }
