@@ -142,17 +142,18 @@ jobs:
             }
 
   update_branch_release:
-      needs: publish_release
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-          with:
-            ref: 'refs/heads/main'
+    needs: publish_release
+    if: contains(github.event.pull_request.labels.*.name, 'release')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: 'refs/heads/main'
 
-        - name: Create and push branch
-          run: |
-            git checkout ${BRANCH_NAME} || git checkout -b ${BRANCH_NAME}
-            git push origin ${BRANCH_NAME}
-          env:
-            BRANCH_NAME: lastet-release
+      - name: Create and push branch
+        run: |
+          git checkout ${BRANCH_NAME} || git checkout -b ${BRANCH_NAME}
+          git push origin ${BRANCH_NAME}
+        env:
+          BRANCH_NAME: lastet-release
