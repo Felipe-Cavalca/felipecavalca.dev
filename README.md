@@ -1,6 +1,8 @@
-# BifrostPHP-Front
+# BifrostPHP - Front-end Module
 
-> Documentation in English / Documentation in English:
+[![Module](https://img.shields.io/badge/Module-Front--end-blue)](https://github.com/Felipe-Cavalca/BifrostPHP-Front)
+
+> Documentation in Portuguese / Documentação em Português:
 > [README-PT.md](README-PT.md)
 
 This repository contains the BifrostPHP front-end source code base.
@@ -25,7 +27,7 @@ Follow the steps below to run Docker Compose:
 
 3. Once complete, you can access the app in your browser using the following URL:
 
-    ```bash
+    ```http
     http://localhost:8000
     ```
 

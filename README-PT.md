@@ -1,4 +1,6 @@
-# BifrostPHP-Front
+# BifrostPHP - Front-end Module
+
+[![Module](https://img.shields.io/badge/Module-Front--end-blue)](https://github.com/Felipe-Cavalca/BifrostPHP-Front)
 
 > Documentation in English / Documentação em inglês:
 > [README.md](README.md)
