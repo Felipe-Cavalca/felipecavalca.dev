@@ -17,6 +17,25 @@ jobs:
       id: get_commit_message
       run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
 
+    - name: Get commit author
+      id: get_commit_author
+      run: |
+        COMMIT_AUTHOR=$(git log -1 --pretty=format:'%an')
+        echo "::set-output name=author::${COMMIT_AUTHOR}"
+
+    - name: Get GitHub username of commit author
+      id: get_github_username
+      uses: actions/github-script@v4
+      with:
+        script: |
+          const authorName = '${{ steps.get_commit_author.outputs.author }}';
+          const { data: users } = await github.search.users({ q: `${authorName} in:name` });
+          if (users.items.length > 0) {
+            return users.items[0].login;
+          }
+          return 'Unknown Author';
+        result-encoding: string
+
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
       with:
@@ -27,7 +46,10 @@ jobs:
           Este PR foi gerado automaticamente pela integração contínua do GitHub Actions.
 
           **Mudanças incluídas neste PR:**
-          - Detalhes do último commit: ${{ steps.get_commit_message.outputs.message }}
+          - Detalhes do último commit:
+          > ${{ steps.get_commit_message.outputs.message }}
+          - Commit realizado por:
+          > @${{ steps.get_github_username.outputs.result }}
 
           **Instruções para revisão:**
           - Verifique as mudanças e garanta que todas as funcionalidades estejam operando conforme esperado.
