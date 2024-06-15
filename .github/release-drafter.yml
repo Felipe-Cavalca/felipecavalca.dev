@@ -1,4 +1,4 @@
-change-template: '* $TITLE in (#$NUMBER)'
+change-template: '* $TITLE por @Author in (#$NUMBER)'
 no-changes-template: '* Sem alterações '
 include-pre-releases: false
 sort-direction: ascending
