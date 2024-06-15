@@ -43,19 +43,22 @@ jobs:
         destination_branch: 'main'
         pr_title: '${{ steps.get_commit_message.outputs.message }}'
         pr_body: |
-          Este PR foi gerado automaticamente pela integração contínua do GitHub Actions.
+          # Este PR foi gerado automaticamente pela integração contínua do GitHub Actions.
 
-          **Mudanças incluídas neste PR:**
+          ## Mudanças incluídas neste PR:
           - Detalhes do último commit:
-          > ${{ steps.get_commit_message.outputs.message }}
-          - Commit realizado por:
-          > @${{ steps.get_github_username.outputs.result }}
+          - ${{ steps.get_commit_message.outputs.message }}
 
-          **Instruções para revisão:**
+          ---
+
+          - Commit realizado por:
+          - @${{ steps.get_github_username.outputs.result }}
+
+          ## Instruções para revisão:
           - Verifique as mudanças e garanta que todas as funcionalidades estejam operando conforme esperado.
           - Realize testes manuais, se necessário, para validar as novas implementações.
 
-          **Informações adicionais:**
+          ## Informações adicionais:
           - Este PR faz parte do fluxo de trabalho automatizado para manter a branch `main` atualizada com as últimas mudanças da branch `release`.
 
     env:
