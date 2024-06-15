@@ -1,0 +1,40 @@
+name: Auto PR from Release to BranchMaster
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Get the last commit message
+      id: get_commit_message
+      run: echo "::set-output name=message::$(git log -1 --pretty=%B)"
+
+    - name: Create Pull Request
+      uses: repo-sync/pull-request@v2
+      with:
+        source_branch: 'release'
+        destination_branch: 'main'
+        pr_title: '${{ steps.get_commit_message.outputs.message }}'
+        pr_body: |
+          Este PR foi gerado automaticamente pela integração contínua do GitHub Actions.
+
+          **Mudanças incluídas neste PR:**
+          - Detalhes do último commit: ${{ steps.get_commit_message.outputs.message }}
+
+          **Instruções para revisão:**
+          - Verifique as mudanças e garanta que todas as funcionalidades estejam operando conforme esperado.
+          - Realize testes manuais, se necessário, para validar as novas implementações.
+
+          **Informações adicionais:**
+          - Este PR faz parte do fluxo de trabalho automatizado para manter a branch `main` atualizada com as últimas mudanças da branch `release`.
+
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
