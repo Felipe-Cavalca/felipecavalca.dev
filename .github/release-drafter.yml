@@ -1,5 +1,5 @@
 change-template: '* $TITLE in (#$NUMBER)'
-no-changes-template: '* No changes from last release'
+no-changes-template: '* Sem alterações '
 include-pre-releases: false
 sort-direction: ascending
 categories:
@@ -31,6 +31,3 @@ template: |
   ## Apoiadores do projeto
   @Felipe-Cavalca
   @JoaoSto
-
-  ## Contribuidores
-  $COMMIT_AUTHORS

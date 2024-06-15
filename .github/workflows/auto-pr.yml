@@ -41,17 +41,13 @@ jobs:
       with:
         source_branch: 'release'
         destination_branch: 'main'
-        pr_title: '${{ steps.get_commit_message.outputs.message }}'
+        pr_title: '@${{ steps.get_github_username.outputs.result }} - ${{ steps.get_commit_message.outputs.message }}'
         pr_body: |
-          # Este PR foi gerado automaticamente pela integração contínua do GitHub Actions.
-
-          ## Mudanças incluídas neste PR:
-          - Detalhes do último commit:
+          # Mudanças incluídas neste PR:
+          ## **Detalhes do último commit:**
           - ${{ steps.get_commit_message.outputs.message }}
 
-          ---
-
-          - Commit realizado por:
+          ## **Commit realizado por:**
           - @${{ steps.get_github_username.outputs.result }}
 
           ## Instruções para revisão:
