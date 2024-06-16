@@ -1,10 +1,10 @@
 <?php
 
-namespace Predocs\Attributes;
+namespace Bifrost\Attributes;
 
 use Attribute;
-use Predocs\Interface\AttributesInterface;
-use Predocs\Class\HttpError;
+use Bifrost\Interface\AttributesInterface;
+use Bifrost\Class\HttpError;
 
 #[Attribute]
 class Method implements AttributesInterface

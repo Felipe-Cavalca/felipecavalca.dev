@@ -1,13 +1,13 @@
 <?php
 
-namespace Predocs\Include;
+namespace Bifrost\Include;
 
 /**
  * Acesso Propriedades Por Função
  *
  * Permite que as propriedades de uma classe sejam acessadas por funções
  *
- * @package Predocs\Include
+ * @package Bifrost\Include
  * @author Felipe dos S. Cavalca
  * @version 1.0.0
  * @since 1.0.0

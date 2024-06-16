@@ -2,16 +2,16 @@
 
 //! MODELO DE EXEMPLO
 
-namespace Predocs\Model;
+namespace Bifrost\Model;
 
-use Predocs\Core\Database;
+use Bifrost\Core\Database;
 
 /**
  * Classe de representação do usuário
  *
  * Classe responsável por realizar a comunicação com o banco de dados
  *
- * @package Predocs\Model
+ * @package Bifrost\Model
  * @version 1.0.0
  * @since 1.0.0
  */

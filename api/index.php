@@ -1,8 +1,8 @@
 <?php
 
-namespace Predocs;
+namespace Bifrost;
 
-use Predocs\Core\Predocs;
+use Bifrost\Core\Request;
 
 /**
  * Função responsável por importar classes do sistema.
@@ -31,4 +31,4 @@ spl_autoload_register(
 /**
  * Este arquivo é o ponto de entrada para o servidor.
  */
-print new Predocs();
+print new Request();

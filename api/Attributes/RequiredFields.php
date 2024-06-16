@@ -1,10 +1,10 @@
 <?php
 
-namespace Predocs\Attributes;
+namespace Bifrost\Attributes;
 
 use Attribute;
-use Predocs\Class\HttpError;
-use Predocs\Interface\AttributesInterface;
+use Bifrost\Class\HttpError;
+use Bifrost\Interface\AttributesInterface;
 
 #[Attribute]
 class RequiredFields implements AttributesInterface

@@ -1,23 +1,23 @@
 <?php
 
-namespace Predocs\Core;
+namespace Bifrost\Core;
 
-use Predocs\Enum\Path;
-use Predocs\Class\HttpError;
+use Bifrost\Enum\Path;
+use Bifrost\Class\HttpError;
 use ReflectionMethod;
 
 /**
- * Classe Predocs
+ * Classe Bifrost
  *
- * Esta é a classe principal do sistema Predocs.
+ * Esta é a classe principal do sistema Bifrost.
  * Ela é responsável por inicializar a configuração e gerenciar o ciclo de vida do sistema.
  *
- * @package Predocs\Core
+ * @package Bifrost\Core
  * @author Felipe dos S. Cavalca
  * @version 1.1.0
  * @since 1.0.0
  */
-final class Predocs
+final class Request
 {
     private string $controller = "index";
     private string $action = "index";
