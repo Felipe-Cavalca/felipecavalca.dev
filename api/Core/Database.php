@@ -1,16 +1,16 @@
 <?php
 
-namespace Predocs\Core;
+namespace Bifrost\Core;
 
 use PDO;
-use Predocs\Core\Settings;
+use Bifrost\Core\Settings;
 
 /**
  * Classe Banco
  *
  * Esta classe é responsável por gerenciar a conexão com o banco de dados.
  *
- * @package Predocs\Core
+ * @package Bifrost\Core
  * @version 1.0.0
  * @since 1.0.0
  */

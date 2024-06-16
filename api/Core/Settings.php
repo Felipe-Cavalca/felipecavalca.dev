@@ -1,6 +1,6 @@
 <?php
 
-namespace Predocs\Core;
+namespace Bifrost\Core;
 
 use Exception;
 
@@ -10,7 +10,7 @@ use Exception;
  * Esta classe é responsável por gerenciar as configurações do sistema.
  * Ela fornece métodos para obter e definir configurações.
  *
- * @package Predocs\Core
+ * @package Bifrost\Core
  * @author Felipe dos S. Cavalca
  * @version 1.0.0
  * @since 1.0.0

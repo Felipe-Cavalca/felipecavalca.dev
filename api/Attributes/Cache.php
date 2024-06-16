@@ -1,10 +1,10 @@
 <?php
 
-namespace Predocs\Attributes;
+namespace Bifrost\Attributes;
 
 use Attribute;
-use Predocs\Interface\AttributesInterface;
-use Predocs\Core\Cache as CoreCache;
+use Bifrost\Interface\AttributesInterface;
+use Bifrost\Core\Cache as CoreCache;
 
 #[Attribute]
 class Cache implements AttributesInterface

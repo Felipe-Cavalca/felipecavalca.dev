@@ -1,13 +1,13 @@
 <?php
 
-namespace Predocs\Include;
+namespace Bifrost\Include;
 
 /**
  * Trait Controller
  *
  * Funções base para um controller
  *
- * @package Predocs\Shared
+ * @package Bifrost\Shared
  * @author Felipe dos S. Cavalca
  * @version 1.1.0
  * @since 1.1.0

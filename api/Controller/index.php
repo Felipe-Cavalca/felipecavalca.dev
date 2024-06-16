@@ -1,14 +1,14 @@
 <?php
 
-namespace Predocs\Controller;
+namespace Bifrost\Controller;
 
-use Predocs\Interface\ControllerInterface;
-use Predocs\Include\Controller;
-use Predocs\Attributes\Method;
-use Predocs\Attributes\RequiredFields;
-use Predocs\Attributes\RequiredParams;
-use Predocs\Attributes\Cache;
-use Predocs\Core\Settings;
+use Bifrost\Interface\ControllerInterface;
+use Bifrost\Include\Controller;
+use Bifrost\Attributes\Method;
+use Bifrost\Attributes\RequiredFields;
+use Bifrost\Attributes\RequiredParams;
+use Bifrost\Attributes\Cache;
+use Bifrost\Core\Settings;
 
 class Index implements ControllerInterface
 {

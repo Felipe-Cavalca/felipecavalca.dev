@@ -1,6 +1,6 @@
 <?php
 
-namespace Predocs\Core;
+namespace Bifrost\Core;
 
 use Redis;
 
@@ -9,7 +9,7 @@ use Redis;
  *
  * Esta classe é responsável por gerenciar o cache.
  *
- * @package Predocs\Core
+ * @package Bifrost\Core
  * @version 1.0.0
  * @since 1.0.0
  */

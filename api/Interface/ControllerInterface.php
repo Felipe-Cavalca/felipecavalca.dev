@@ -1,13 +1,13 @@
 <?php
 
-namespace Predocs\Interface;
+namespace Bifrost\Interface;
 
 /**
  * Interface ControllerInterface
  *
  * Interface para os controllers
  *
- * @package Predocs\Rules
+ * @package Bifrost\Rules
  * @author Felipe dos S. Cavalca
  * @version 1.1.0
  * @since 1.0.0

@@ -1,10 +1,10 @@
 <?php
 
-namespace Predocs\Enum;
+namespace Bifrost\Enum;
 
 enum Path: string
 {
-    case CLASSE = "Predocs\\Class\\";
-    case CONTROLLERS = "Predocs\\Controller\\";
-    case MODEL = "Predocs\\Model\\";
+    case CLASSE = "Bifrost\\Class\\";
+    case CONTROLLERS = "Bifrost\\Controller\\";
+    case MODEL = "Bifrost\\Model\\";
 }
