@@ -12,8 +12,6 @@ use Bifrost\Core\Database;
  * Classe responsável por realizar a comunicação com o banco de dados
  *
  * @package Bifrost\Model
- * @version 1.0.0
- * @since 1.0.0
  */
 class User
 {

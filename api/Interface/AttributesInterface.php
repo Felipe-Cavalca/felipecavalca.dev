@@ -9,8 +9,6 @@ namespace Bifrost\Interface;
  *
  * @package Bifrost\Interface
  * @author Felipe dos S. Cavalca
- * @version 1.0.0
- * @since 1.1.0
  */
 interface AttributesInterface
 {

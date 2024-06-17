@@ -9,8 +9,6 @@ namespace Bifrost\Class;
  *
  * @package Bifrost\Class
  * @author Felipe dos S. Cavalca
- * @version 2.0.0
- * @since 1.1.0
  */
 class HttpError extends \Error
 {
