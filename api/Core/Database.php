@@ -27,10 +27,6 @@ class Database
         if (empty(self::$conn)) {
             self::$conn = $this->conn();
         }
-
-        if (empty(self::$driver)) {
-            self::$driver = self::$settings->database["driver"];
-        }
     }
 
     private static function conn(): PDO
@@ -160,34 +156,15 @@ class Database
         }
 
         $fields = [];
-
-        switch (static::$driver) {
-            case "sqlite":
-                $query = $this->list("PRAGMA table_info('{$table}')");
-                foreach ($query as $field) {
-                    if ($field["type"] == "INTEGER") {
-                        $field["type"] = "int(11)";
-                    }
-                    $fields[] = [
-                        "name" => $field["name"],
-                        "type" => $field["type"],
-                        "null" => !$field["notnull"],
-                        "default" => $field["dflt_value"],
-                        "pk" => $field["pk"] == 1
-                    ];
-                }
-            case "mysql":
-            default:
-                $query = $this->list("DESC {$table}");
-                foreach ($query as $field) {
-                    $fields[] = [
-                        "name" => $field["Field"],
-                        "type" => $field["Type"],
-                        "null" => $field["Null"] == "YES",
-                        "default" => $field["Default"],
-                        "pk" => $field["Extra"] == "auto_increment"
-                    ];
-                }
+        $query = $this->list("DESC {$table}");
+        foreach ($query as $field) {
+            $fields[] = [
+                "name" => $field["Field"],
+                "type" => $field["Type"],
+                "null" => $field["Null"] == "YES",
+                "default" => $field["Default"],
+                "pk" => $field["Extra"] == "auto_increment"
+            ];
         }
 
         return $fields;
@@ -196,23 +173,8 @@ class Database
     public function getTables(): array
     {
         $tables = [];
-
-        switch (static::$driver) {
-            case "sqlite":
-                $query = $this->list("SELECT * FROM sqlite_master WHERE type='table'");
-                foreach ($query as $table) {
-                    if ($table["name"] != "sqlite_sequence") {
-                        $tables[] = $table["name"];
-                    }
-                }
-                break;
-            case "mysql":
-            default:
-                $query = $this->list("SHOW TABLES");
-                $tables = array_column($query, 'Tables_in_' . self::$settings->database["database"]);
-                break;
-        }
-
+        $query = $this->list("SHOW TABLES");
+        $tables = array_column($query, 'Tables_in_' . self::$settings->database["database"]);
         return $tables;
     }
 

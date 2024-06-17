@@ -74,24 +74,13 @@ final class Settings
 
     private function getSettingsDatabase()
     {
-        $driver = $this->getEnv("MYSQL_DRIVER");
-
-        if ($driver == "MySQL") {
-            return [
-                "driver" => "mysql",
-                "host" => static::getEnv("MYSQL_HOST"),
-                "port" => static::getEnv("MYSQL_PORT"),
-                "database" => static::getEnv("MYSQL_DATABASE"),
-                "username" => static::getEnv("MYSQL_USER"),
-                "password" => static::getEnv("MYSQL_PASSWORD"),
-            ];
-        } else if ($driver == "sqlite") {
-            return [
-                "driver" => "sqlite",
-                "database" => static::getEnv("DB_DATABASE"),
-            ];
-        } else {
-            throw new Exception("Variável de ambiente MYSQL_HOST não encontrada ou inválida.");
-        }
+        return [
+            "driver" => static::getEnv("MYSQL_DRIVER", true),
+            "host" => static::getEnv("MYSQL_HOST", true),
+            "port" => static::getEnv("MYSQL_PORT", true),
+            "database" => static::getEnv("MYSQL_DATABASE", true),
+            "username" => static::getEnv("MYSQL_USER", true),
+            "password" => static::getEnv("MYSQL_PASSWORD", true),
+        ];
     }
 }
