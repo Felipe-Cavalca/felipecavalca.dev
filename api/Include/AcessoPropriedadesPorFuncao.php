@@ -9,8 +9,6 @@ namespace Bifrost\Include;
  *
  * @package Bifrost\Include
  * @author Felipe dos S. Cavalca
- * @version 1.0.0
- * @since 1.0.0
  */
 trait acessoPropriedadesPorFuncao
 {

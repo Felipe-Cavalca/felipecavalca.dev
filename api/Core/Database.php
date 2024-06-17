@@ -11,8 +11,6 @@ use Bifrost\Core\Settings;
  * Esta classe é responsável por gerenciar a conexão com o banco de dados.
  *
  * @package Bifrost\Core
- * @version 1.0.0
- * @since 1.0.0
  */
 class Database
 {
