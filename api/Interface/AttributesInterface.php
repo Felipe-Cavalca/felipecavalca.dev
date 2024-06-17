@@ -12,7 +12,11 @@ namespace Bifrost\Interface;
  */
 interface AttributesInterface
 {
-    // public function __construct();
+    public function __construct();
 
-    // public static function beforeCall(): mixed;
+    public function __destruct();
+
+    public function beforeRun(): mixed;
+
+    public function afterRun($return): void;
 }

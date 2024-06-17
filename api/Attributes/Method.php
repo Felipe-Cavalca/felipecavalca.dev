@@ -19,6 +19,15 @@ class Method implements AttributesInterface
         }
     }
 
+    public function __destruct() {}
+
+    public function beforeRun(): mixed
+    {
+        return null;
+    }
+
+    public function afterRun($return): void {}
+
     private function validateMethods(array $methods)
     {
         if (!in_array($_SERVER["REQUEST_METHOD"], $methods)) {

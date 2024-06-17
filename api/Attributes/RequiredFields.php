@@ -15,6 +15,15 @@ class RequiredFields implements AttributesInterface
         $this->validateRequiredFields($this->fields);
     }
 
+    public function __destruct() { }
+
+    public function beforeRun(): mixed
+    {
+        return null;
+    }
+
+    public function afterRun($return): void { }
+
     private function validateRequiredFields(array $fields)
     {
         foreach ($fields as $field => $param) {
