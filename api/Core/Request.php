@@ -35,12 +35,12 @@ final class Request
     private function sanitizeGet(): void
     {
         $get = $_GET;
-        $url = explode("/", $get["_PagePredocs"] ?? "");
+        $url = explode("/", $get["_PageBifrost"] ?? "");
 
         $this->controller = count($url) == 2 ? $url[0] : $this->controller;
         $this->action = count($url) == 2 ? $url[1] : $url[0];
 
-        unset($get["_PagePredocs"]);
+        unset($get["_PageBifrost"]);
         $_GET = $get;
     }
 
