@@ -32,8 +32,12 @@ final class Settings
         }
     }
 
-    protected static function getEnv(string $param): mixed
+    protected static function getEnv(string $param, bool $required = false): mixed
     {
+        if($required && !getenv($param)) {
+            throw new Exception("A variável de ambiente '{$param}' não foi definida.");
+        }
+
         return getenv($param) ?: null;
     }
 
