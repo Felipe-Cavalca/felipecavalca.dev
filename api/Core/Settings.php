@@ -2,7 +2,7 @@
 
 namespace Bifrost\Core;
 
-use Exception;
+use Bifrost\Class\HttpError;
 
 /**
  * Classe de configuração do sistema
@@ -35,7 +35,7 @@ final class Settings
     protected static function getEnv(string $param, bool $required = false): mixed
     {
         if($required && !getenv($param)) {
-            throw new Exception("A variável de ambiente '{$param}' não foi definida.");
+            throw new HttpError("e500");
         }
 
         return getenv($param) ?: null;
