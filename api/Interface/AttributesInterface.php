@@ -12,7 +12,7 @@ namespace Bifrost\Interface;
  */
 interface AttributesInterface
 {
-    public function __construct(...$params);
+    // public function __construct(...$params);
 
     public function __destruct();
 
