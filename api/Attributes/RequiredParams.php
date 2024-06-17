@@ -15,6 +15,15 @@ class RequiredParams implements AttributesInterface
         $this->validateRequiredParams($this->params);
     }
 
+    public function __destruct() { }
+
+    public function beforeRun(): mixed
+    {
+        return null;
+    }
+
+    public function afterRun($return): void { }
+
     private function validateRequiredParams(array $params)
     {
         foreach ($params as $field => $param) {
