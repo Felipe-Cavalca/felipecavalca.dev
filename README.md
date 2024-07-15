@@ -1,5 +1,10 @@
 # base-repo
 
+[![Repo](https://img.shields.io/badge/Repo-Base-blue)](./)
+
+[![Repo](https://img.shields.io/badge/Language-git-green)](./)
+[![Repo](https://img.shields.io/badge/Language-sh-green)](./)
+
 Base repository for my project to maintain standardization of licenses, inssues, actions, etc.
 
 ## Useful links
