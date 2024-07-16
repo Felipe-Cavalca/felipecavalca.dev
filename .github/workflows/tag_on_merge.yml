@@ -113,9 +113,26 @@ jobs:
             const draftRelease = releases.data.find(release => release.draft);
             const prNumber = context.payload.pull_request.number;
             const labels = (await github.issues.listLabelsOnIssue({ owner, repo, issue_number: prNumber })).data.map(label => label.name);
-            if (draftRelease) {
-                const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop();
 
+            if (draftRelease) {
+                const tags = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name);
+
+                // Função para comparar versões semânticas corretamente
+                function compareTags(a, b) {
+                    const parseTag = tag => tag.split('.').map(Number);
+                    const aParts = parseTag(a.split('-')[0]);
+                    const bParts = parseTag(b.split('-')[0]);
+                    for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+                        const diff = (aParts[i] || 0) - (bParts[i] || 0);
+                        if (diff !== 0) return diff;
+                    }
+                    const aSuffix = parseInt(a.split('-')[1] || '0');
+                    const bSuffix = parseInt(b.split('-')[1] || '0');
+                    return aSuffix - bSuffix;
+                }
+
+                tags.sort(compareTags);
+                const lastTag = tags.pop();
                 await github.repos.updateRelease({
                     owner,
                     repo,
@@ -123,7 +140,7 @@ jobs:
                     tag_name: lastTag,
                     name: lastTag.trim().replace(/-/g, ' (') + ')',
                     draft: false,
-                    prerelease: !labels.includes('release'),
+                    prerelease: labels.includes('release'),
                 });
             }
 
