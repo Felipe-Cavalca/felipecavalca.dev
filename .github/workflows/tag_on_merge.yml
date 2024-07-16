@@ -87,6 +87,7 @@ jobs:
             const labels = (await github.issues.listLabelsOnIssue({ owner, repo, issue_number: prNumber })).data.map(label => label.name);
             if (draftRelease) {
                 const lastTag = (await github.repos.listTags({ owner, repo })).data.map(tag => tag.name).sort().pop();
+                echo `Updating release ${draftRelease.id} with tag ${lastTag}`;
 
                 await github.repos.updateRelease({
                     owner,
