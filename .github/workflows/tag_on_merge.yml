@@ -36,6 +36,9 @@ jobs:
             const newTagNumber = isNaN(lastTagNumber) ? 1 : lastTagNumber + 1;
 
             console.table(labels);
+            console.log("lastTag: ", lastTag);
+            console.log("baseString: ", baseString);
+            console.table("parts: ", parts);
             console.log("lastTagNumber: ", lastTagNumber);
             console.log("newTagNumber: ", newTagNumber);
 
