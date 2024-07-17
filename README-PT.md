@@ -1,9 +1,16 @@
 # BifrostPHP - Front-end Module
 
-[![Module](https://img.shields.io/badge/Module-Front--end-blue)](https://github.com/Felipe-Cavalca/BifrostPHP-Front)
+[![Repo](https://img.shields.io/badge/Bifrost-Front-blue)](./)
 
-> Documentation in English / Documentação em inglês:
-> [README.md](README.md)
+[![GIT](https://img.shields.io/badge/GIT-orange)](./)
+[![MD](https://img.shields.io/badge/MD-darkblue)](./)
+[![YML](https://img.shields.io/badge/YML-darkblue)](./)
+[![Linguagem](https://img.shields.io/badge/JS-yellow)](./)
+[![Linguagem](https://img.shields.io/badge/HTML-red)](./)
+[![Linguagem](https://img.shields.io/badge/CSS-blue)](./)
+
+[![link-readme-inglês](https://img.shields.io/badge/README-English/Inglês-red)](./README.md)
+[![link-readme-Portugês](https://img.shields.io/badge/README-Portuguese/Portugês-green)](./README-PT.md)
 
 Este repositório contém a base de código-fonte do front-end do BifrostPHP.
 
