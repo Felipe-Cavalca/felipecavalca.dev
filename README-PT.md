@@ -40,4 +40,4 @@ Siga as etapas abaixo para executar o Docker Compose:
 
 ## Patrocinado por
 
-* @JoaoSto
+* @Felipe-Cavalca
