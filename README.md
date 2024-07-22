@@ -1,140 +1,54 @@
-# base-repo
+# Felipe dos Santos Cavalca
 
-[![link-repo-base](https://img.shields.io/badge/Repo-Base-blue)](./)
+## index / Índice
 
-[![GIT](https://img.shields.io/badge/GIT-orange)](./)
-[![MD](https://img.shields.io/badge/MD-darkblue)](./)
-[![YML](https://img.shields.io/badge/YML-darkblue)](./)
+- [About me (English)](#about-me-english)
+- [Sobre mim (Português)](#sobre-mim-português)
+- [Languages I enjoy the most / Linguagens que mais gosto](#languages-i-enjoy-the-most--linguagens-que-mais-gosto)
+- [Sponsors / Patrocinadores](#sponsors--patrocinadores)
+- [Supporters / Apoiadores](#supporters--apoiadores)
+- [Useful Links / Links Úteis](#useful-links--links-úteis)
 
-[![link-readme-inglês](https://img.shields.io/badge/README-English/Inglês-red)](./README.md#english)
-[![link-readme-Portugês](https://img.shields.io/badge/README-Portuguese/Portugês-green)](./README.md#português)
+---
 
-## English
+## About me (English)
 
-Bifrost is a PHP framework with a basis for web development
+Hello! My name is **Felipe Cavalca** and I am a university-educated programmer. I have experience in various technologies, including `PHP`, `HTML`, `CSS`, `JavaScript`, and `SQL`. I enjoy programming my own projects, including those related to my work.
 
-## Description
+## Sobre mim (Português)
 
-This repository contains a `tasks.json` file inside the `.vscode` folder, which defines tasks to pull repositories with `API`, `APP`, `Banco` scripts and others.
+Olá! Meu nome é **Felipe Cavalca** e sou programador com formação universitária. Tenho experiência em diversas tecnologias, incluindo `PHP`, `HTML`, `CSS`, `JavaScript` e `SQL`. Gosto de programar meus próprios projetos, incluindo os relacionados ao meu trabalho.
 
-## Requirements
+## Languages I enjoy the most / Linguagens que mais gosto
 
-* Git
-*Docker
-* Docker Compose
-* Visual Studio Code (VS Code)
+1. **PHP**
+2. **JS**
+3. **CSS**
+4. **SQL**
+5. **HTML**
 
-## Installation
+## Sponsors / Patrocinadores
 
-1. Clone the repository:
+<a href="https://github.com/DarlaTorres">
+    <img src="https://avatars.githubusercontent.com/u/66099962?v=4" width="40" height="40" style="border-radius: 50%;">
+</a>
+<a href="https://github.com/JoaoSto">
+    <img src="https://avatars.githubusercontent.com/u/68963884?v=4" width="40" height="40" style="border-radius: 50%;">
+</a>
 
-    ```sh
-    git clone https://github.com/Felipe-Cavalca/BifrostPHP.git
-    cd BifrostPHP
-    ```
+## Supporters / Apoiadores
 
-2. Open the project in Visual Studio Code:
+<a href="https://github.com/profjonhson">
+    <img src="https://avatars.githubusercontent.com/u/42740942?v=4" width="40" height="40" style="border-radius: 50%;">
+</a>
+<a href="https://github.com/joaocavalca10">
+    <img src="https://avatars.githubusercontent.com/u/85898316?v=4" width="40" height="40" style="border-radius: 50%;">
+</a>
 
-    ```sh
-    code .
-    ```
+## Useful Links / Links Úteis
 
-3. In VS Code, open the built-in terminal and run the tasks defined in `tasks.json` to pull the scripts from the required repositories:
-    * In the menu, go to **Terminal > Run Task...**
-    * Select the desired task to perform.
-
-4. Build and start Docker containers:
-
-    ```sh
-    docker-compose up --build -d
-    ```
-
-## Contributions
-
-Contributions are welcome! Please follow the steps below to contribute:
-
-1. Fork the project.
-2. Create a new branch:
-
-    ```sh
-    git checkout -b my-feature
-    ```
-
-3. Make your changes and commit:
-
-    ```sh
-    git commit -m 'My new feature'
-    ```
-
-4. Upload to remote repository:
-
-    ```sh
-    git push origin my-feature
-    ```
-
-5. Open a Pull Request.
-
-## português
-
-Bifrost é um framework em PHP com uma base para o desenvolvimento web
-
-## Descrição
-
-Este repositório contém um arquivo `tasks.json` dentro da pasta `.vscode`, que define tarefas para puxar os repositórios com os scripts de `API`, `APP`, `Banco` entre outros.
-
-## Requisitos
-
-* Git
-* Docker
-* Docker Compose
-* Visual Studio Code (VS Code)
-
-## Instalação
-
-1. Clone o repositório:
-
-    ```sh
-    git clone https://github.com/Felipe-Cavalca/BifrostPHP.git
-    cd BifrostPHP
-    ```
-
-2. Abra o projeto no Visual Studio Code:
-
-    ```sh
-    code .
-    ```
-
-3. No VS Code, abra o terminal integrado e execute as tarefas definidas no `tasks.json` para puxar os scripts dos repositórios necessários:
-    * No menu, vá para **Terminal > Run Task...**
-    * Selecione a tarefa desejada para executar.
-
-4. Construa e inicie os containers Docker:
-
-    ```sh
-    docker-compose up --build -d
-    ```
-
-## Contribuições
-
-Contribuições são bem-vindas! Por favor, siga os passos abaixo para contribuir:
-
-1. Faça um fork do projeto.
-2. Crie uma nova branch:
-
-    ```sh
-    git checkout -b minha-feature
-    ```
-
-3. Faça suas modificações e commit:
-
-    ```sh
-    git commit -m 'Minha nova feature'
-    ```
-
-4. Envie para o repositório remoto:
-
-    ```sh
-    git push origin minha-feature
-    ```
-
-5. Abra um Pull Request.
+- [VsCode Profile](Home.code-profile)
+- [VsCode Settings](settingsVsCode.jsonc)
+- [JetBrains Mono](https://www.jetbrains.com/pt-br/lp/mono/)
+- [Custom Components](https://github.com/Felipe-Cavalca/BifrostPHP-Components)
+- [Bifrost PHP](https://github.com/stars/Felipe-Cavalca/lists/bifrostphp)
