@@ -1,0 +1,10 @@
+services:
+  app:
+    container_name: app
+    build:
+      context: ./app
+      dockerfile: ./Dockerfile
+    ports:
+      - "20080:80"
+    volumes:
+      - ./app:/usr/local/apache2/htdocs/
