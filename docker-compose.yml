@@ -6,6 +6,5 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "20080:80"
-      - "20443:443"
     volumes:
       - ./app:/usr/local/apache2/htdocs/
