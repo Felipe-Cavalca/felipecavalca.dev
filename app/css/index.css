@@ -11,3 +11,29 @@ pre {
     border-radius: 4px;
     overflow: auto;
 }
+
+/* Customização da barra de rolagem para navegadores baseados em WebKit */
+::-webkit-scrollbar {
+    width: 12px; /* Largura da barra de rolagem vertical */
+    height: 12px; /* Altura da barra de rolagem horizontal */
+}
+
+::-webkit-scrollbar-track {
+    background: #333; /* Cor do fundo da trilha */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #555; /* Cor do "polegar" da barra de rolagem */
+    border-radius: 10px; /* Bordas arredondadas */
+    border: 3px solid #333; /* Espaço entre o "polegar" e a trilha */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #888; /* Cor do "polegar" quando está sendo hover */
+}
+
+/* Estilo da barra de rolagem para navegadores que suportam scrollbar-color e scrollbar-width */
+body {
+    scrollbar-color: #555 #333; /* Cor do "polegar" e da trilha, respectivamente */
+    scrollbar-width: thin; /* Largura da barra de rolagem */
+}

@@ -5,24 +5,95 @@
     <title>Página Inicial</title>
 </head>
 
-<body>
-    <c-navbar>Inicial</c-navbar>
+<style>
+    img {
+        max-height: 100vh;
+    }
 
-    <div class="container mt-5">
+    #inicio {
+        height: 100vh;
+    }
+
+    /* Estilos para o indicador de rolagem */
+    .scroll-indicator {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 2rem;
+        color: white;
+        animation: bounce 2s infinite;
+    }
+
+    /* Animação de bounce */
+    @keyframes bounce {
+
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+            transform: translateY(0);
+        }
+
+        40% {
+            transform: translateY(-20px);
+        }
+
+        60% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center" id="inicio">
         <div class="row">
-            <div class="col-md-10 offset-md-1" id="content">
-                <p>Olá, seja bem-vindo ao BifrostPHP</p>
-                <p>Um framework para desenvolvimento web</p>
+            <div class="col-sm-12 col-md-6 d-flex justify-content-center align-items-center">
+                <div class="font-monospace flex-column">
+                    <h1>Felipe Cavalca</h1>
+                    <h2 class="mt-3">&lt;h2&gt;Desenvolvedor WEB&lt;/h2&gt;</h2>
+                    <b class="mb-2">&lt;b&gt;Não incluso o fron&lt;/b&gt;</b>
+                </div>
+            </div>
+            <div class="col-6 d-none d-md-block text-center">
+                <img class="img-fluid" src="../assets/perfil/perfil-removebg.png" alt="Foto de perfil">
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>&#8595;</span>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="card">
+            <h3 class="card-title m-4">Sobre</h3>
+            <div class="card-body">
+                <p>
+                    Sou um desenvolvedor Web apaixonado por tecnologia e inovação.
+                </p>
+                <p>
+                    Com formação técnica em Informática pela ETEC e um bacharelado em Análise e Desenvolvimento de
+                    Sistemas pela FATEC, acumulei vasta experiência em desenvolvimento web e automação de processos.
+                </p>
+                <p>
+                    Atualmente, faço parte da equipe de desenvolvimento da
+                    <a href="https://www.tmh.com.br/">Thompson</a>.
+                </p>
+                <p>
+                    Um dos meus principais projetos atualmente é o Bifrost, um framework que facilita o desenvolvimento
+                    de serviços web.
+                </p>
+                <p>
+                    Sou um entusiasta da tecnologia, sempre buscando aprimorar minhas habilidades e conhecimentos para
+                    entregar projetos de alta qualidade.
+                </p>
             </div>
         </div>
     </div>
 
     <script src="../core/core.js"></script>
     <script type="text/javascript">
-        const before = (bifrost) => { };
-        const after = (bifrost) => { };
-
-        let bifrost = new Bifrost(before, after);
+        new Bifrost();
     </script>
 </body>
 
