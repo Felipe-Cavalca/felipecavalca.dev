@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: felipecavalca.dev
+    container_name: felipecavalca_dev
     build:
       context: ./app
       dockerfile: ./Dockerfile
