@@ -79,6 +79,19 @@
     </div>
 
     <div class="container mt-5">
+        <div class="card bloco social">
+            <h3 class="card-title m-4">Linguagens</h3>
+            <div class="card-body row">
+                <div class="col-sm-12 col-md-3"></div>
+                <div class="col-sm-12 col-md-6">
+                    <canvas id="github-languages"></canvas>
+                </div>
+                <div class="col-sm-12 col-md-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
         <div class="card bloco">
             <h3 class="card-title m-4">Sobre</h3>
             <div class="card-body">
@@ -108,8 +121,11 @@
     </div>
 
     <script src="../core/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/pages/index.js"></script>
     <script type="text/javascript">
-        new Bifrost();
+        let before = () => { };
+        new Bifrost(before, index);
     </script>
 </body>
 
