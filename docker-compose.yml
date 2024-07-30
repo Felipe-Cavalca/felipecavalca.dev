@@ -1,6 +1,6 @@
 services:
   app:
-    container_name: felipecavalca_dev
+    container_name: felipecavalca_dev_app
     build:
       context: ./app
       dockerfile: ./Dockerfile
@@ -8,3 +8,44 @@ services:
       - "20080:80"
     volumes:
       - ./app:/usr/local/apache2/htdocs/
+    networks:
+      - felipecavalca-network
+
+  api:
+    container_name: felipecavalca_dev_api
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
+    ports:
+      - "28080:80"
+    env_file:
+      - ./api/.env
+    volumes:
+      - ./api:/var/www/html
+      - felipecavalca_storage:/storage
+    networks:
+      - felipecavalca-network
+    depends_on:
+      - redis
+
+  redis:
+    container_name: felipecavalca_dev_redis
+    image: redis:latest
+    volumes:
+      - felipecavalca-redis_data:/data
+    networks:
+      - felipecavalca-network
+
+volumes:
+  felipecavalca_storage:
+    name: felipecavalca_storage
+    labels:
+      com.description: "This volume is used for data storage"
+  felipecavalca-redis_data:
+    name: felipecavalca-redis_data
+    labels:
+      com.description: "This volume is used for Redis"
+
+networks:
+  felipecavalca-network:
+    name: felipecavalca-network
