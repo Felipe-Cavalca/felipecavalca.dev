@@ -16,8 +16,6 @@ services:
     build:
       context: ./api
       dockerfile: ./Dockerfile
-    ports:
-      - "28080:80"
     env_file:
       - ./api/.env
     volumes:
