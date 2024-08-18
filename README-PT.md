@@ -37,6 +37,14 @@ Siga as etapas abaixo para executar o Docker Compose:
     http://localhost:28080
     ```
 
+## Documentação
+
+Para gerar a documentação do projeto em formato HTML, execute o seguinte comando:
+
+```bash
+docker run --rm -v "$(pwd):/data" "phpdoc/phpdoc:3" run -d ./api -t ./docs/api
+```
+
 ## Patrocinado por
 
 * @Felipe-Cavalca
