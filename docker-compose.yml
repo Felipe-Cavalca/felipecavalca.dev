@@ -8,6 +8,7 @@ services:
       - "20080:80"
     volumes:
       - ./app:/usr/local/apache2/htdocs/
+      - ./docs:/usr/local/apache2/htdocs/docs
     networks:
       - felipecavalca-network
 
