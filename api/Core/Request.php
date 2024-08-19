@@ -41,7 +41,7 @@ final class Request
      * @uses Request::sanitizePost()
      * @return void
      */
-    public function __construct(): void
+    public function __construct()
     {
         Settings::init();
         $this->sanitizeGet();
