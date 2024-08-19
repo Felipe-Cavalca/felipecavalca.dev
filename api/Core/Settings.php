@@ -28,7 +28,7 @@ final class Settings
      * @uses Settings::iniSet()
      * @return void
      */
-    public function __construct(): void
+    public function __construct()
     {
         $this->init();
     }
