@@ -14,6 +14,10 @@ class Github implements ControllerInterface
 
     /**
      * Função consulta os repositorios e retorna as linguagens
+     * @api api/github/getLanguages
+     * @method GET
+     *
+     * @uses GithubModel::getLanguages()
      * @return array
      */
     #[Method(["GET"])]

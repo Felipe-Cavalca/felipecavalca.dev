@@ -1,28 +1,47 @@
 <?php
 
+/**
+ * It is responsible for managing the system settings.
+ *
+ * @category Core
+ * @copyright 2024
+ */
+
 namespace Bifrost\Core;
 
 use Bifrost\Class\HttpError;
 
 /**
- * Classe de configuração do sistema
- *
- * Esta classe é responsável por gerenciar as configurações do sistema.
- * Ela fornece métodos para obter e definir configurações.
+ * It is responsible for managing the system settings.
  *
  * @package Bifrost\Core
  * @author Felipe dos S. Cavalca
  */
 final class Settings
 {
+    /** It is responsible for controlling the initialization of the settings. */
     private static bool $initialized = false;
 
+    /**
+     * It is responsible for initializing the settings.
+     *
+     * @uses Settings::iniSet()
+     * @return void
+     */
     public function __construct()
     {
         $this->init();
     }
 
-    public function __get($name)
+    /**
+     * It is responsible for returning the value of the requested property.
+     *
+     * @param string $name The name of the property to be returned.
+     * @uses Settings::getSettingsDatabase()
+     * @uses Settings::getEnv()
+     * @return mixed
+     */
+    public function __get($name): mixed
     {
         switch ($name) {
             case "database":
@@ -32,15 +51,28 @@ final class Settings
         }
     }
 
+    /**
+     * It is responsible for returning the value of the requested property of the environment.
+     *
+     * @param string $param The name of the property to be returned.
+     * @param bool $required Indicates whether the property is required.
+     * @uses HttpError::__construct()
+     * @return mixed
+     */
     protected static function getEnv(string $param, bool $required = false): mixed
     {
-        if($required && !getenv($param)) {
+        if ($required && !getenv($param)) {
             throw new HttpError("e500");
         }
 
         return getenv($param) ?: null;
     }
 
+    /**
+     * It is responsible for setting the headers of the response.
+     *
+     * @return void
+     */
     private static function setHeaders(): void
     {
         header("X-Powered-By: PHP/" . phpversion());
@@ -53,12 +85,26 @@ final class Settings
         header("Access-Control-Expose-Headers: Authorization");
     }
 
+    /**
+     * It is responsible for setting the PHP configuration.
+     *
+     * @uses Settings::getEnv()
+     * @return void
+     */
     private static function iniSet(): void
     {
         ini_set("display_errors", static::getEnv("PHP_DISPLAY_ERRORS"));
         ini_set("display_startup_errors", static::getEnv("PHP_DISPLAY_STARTUP_ERRORS"));
     }
 
+    /**
+     * It is responsible for initializing the settings.
+     *
+     * @uses Settings::iniSet()
+     * @uses Settings::setHeaders()
+     * @uses Settings::$initialized
+     * @return void
+     */
     public static function init(): void
     {
         // Valida se já foi inicializado
@@ -72,7 +118,12 @@ final class Settings
         self::$initialized = true;
     }
 
-    private function getSettingsDatabase()
+    /**
+     * It is responsible for returning the database settings.
+     *
+     * @return array
+     */
+    private function getSettingsDatabase(): array
     {
         return [
             "driver" => static::getEnv("MYSQL_DRIVER", true),
