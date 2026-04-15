@@ -3,37 +3,42 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Felipe Cavalca | Pagina Pessoal</title>
-  <meta name="description" content="Pagina pessoal de Felipe Cavalca com projetos, bio e contatos.">
+  <title>Felipe Cavalca | Página pessoal</title>
+  <meta name="description" content="Página pessoal de Felipe Cavalca com projetos, bio e contatos.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="bg-shape bg-shape-a" aria-hidden="true"></div>
-  <div class="bg-shape bg-shape-b" aria-hidden="true"></div>
-
   <header class="site-header">
     <a class="brand" href="#top">FC</a>
+    <nav class="top-nav" aria-label="Navegação principal">
+      <a href="#sobre">Sobre</a>
+      <a href="#stack">Stack</a>
+      <a href="#agora">Agora</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#contato">Contato</a>
+    </nav>
   </header>
 
   <main id="top">
     <section class="hero reveal">
-      <p class="eyebrow">Pagina pessoal</p>
+      <img
+        class="hero-logo"
+        src="assets/logo.svg"
+        alt="Logo Felipe Cavalca"
+        width="112"
+        height="112"
+      >
+      <p class="eyebrow">Página pessoal</p>
       <h1>Oi, eu sou Felipe Cavalca.</h1>
-      <p class="lead">Eu construo experiencias digitais com foco em performance, design e simplicidade.</p>
+      <p class="lead">Eu construo experiências digitais com foco em performance, design e simplicidade.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#projetos">Ver projetos</a>
         <a class="btn btn-ghost" href="#contato">Falar comigo</a>
         <button class="btn btn-ghost" id="support-btn" type="button">Me apoie</button>
-      </div>
-      <div class="section-actions" aria-label="Navegacao por secoes">
-        <a class="btn btn-section" href="#sobre">Sobre</a>
-        <a class="btn btn-section" href="#stack">Stack</a>
-        <a class="btn btn-section" href="#agora">Agora</a>
-        <a class="btn btn-section" href="#projetos">Projetos</a>
-        <a class="btn btn-section" href="#contato">Contato</a>
       </div>
     </section>
 
@@ -99,15 +104,15 @@
       <div class="now-grid">
         <article class="now-item">
           <h3>Construindo agora</h3>
-          <p>Evoluindo o TraceSQL para facilitar a analise de queries, gargalos de banco e comportamento de consultas em producao.</p>
+          <p>Evoluindo o TraceSQL para facilitar a análise de queries, gargalos de banco e comportamento de consultas em produção.</p>
         </article>
         <article class="now-item">
           <h3>Melhorando processo</h3>
-          <p>Padronizando estrutura de projetos, automacoes de deploy e qualidade de codigo para acelerar entregas com seguranca.</p>
+          <p>Padronizando estrutura de projetos, automações de deploy e qualidade de código para acelerar entregas com segurança.</p>
         </article>
         <article class="now-item">
           <h3>Objetivo</h3>
-          <p>Lancar versoes mais robustas dos meus projetos open source, com foco em documentacao clara e boa experiencia para devs.</p>
+          <p>Lançar versões mais robustas dos meus projetos open source, com foco em documentação clara e boa experiência para devs.</p>
         </article>
       </div>
     </section>
@@ -117,7 +122,7 @@
       <ul class="project-list">
         <li>
           <h3>Xdebug Profiler Viewer</h3>
-          <p>Extensao do VS Code para abrir, visualizar e navegar por perfis do Xdebug direto no editor.</p>
+          <p>Extensão do VS Code para abrir, visualizar e navegar por perfis do Xdebug direto no editor.</p>
           <a href="https://github.com/Felipe-Cavalca/xdebug-profiler-viewer" aria-label="Abrir Xdebug Profiler Viewer">Abrir</a>
         </li>
         <li>
@@ -132,20 +137,20 @@
         </li>
         <li>
           <h3>Bifrost</h3>
-          <p>Templates e pipelines reutilizáveis para frontend, backend e infraestrutura</p>
+          <p>Templates e pipelines reutilizáveis para frontend, backend e infraestrutura.</p>
           <a href="https://github.com/Felipe-Cavalca/Bifrost" aria-label="Abrir Bifrost">Abrir</a>
         </li>
         <li>
           <h3>Curso.dev</h3>
           <p>Realizando o curso.dev do Filipe Deschamps</p>
-          <a href="https://curso.dev/" aria-label="Abrir Projeto 03">Ver pagina do curso</a>
+          <a href="https://curso.dev/" aria-label="Abrir Projeto 03">Ver página do curso</a>
         </li>
       </ul>
     </section>
 
     <section id="contato" class="card reveal">
       <h2>Contato</h2>
-      <p>Voce pode me encontrar nestes canais:</p>
+      <p>Você pode me encontrar nestes canais:</p>
       <ul class="contact-list">
         <li><a href="https://github.com/Felipe-Cavalca" target="_blank" rel="noreferrer">GitHub</a></li>
         <li><a href="mailto:email@felipecavalca.dev">Email</a></li>
@@ -158,7 +163,7 @@
     <div class="support-modal-card" role="dialog" aria-modal="true" aria-labelledby="support-title">
       <button class="support-close" id="support-close" type="button" aria-label="Fechar apoio">Fechar</button>
       <h2 id="support-title">Apoie via Pix</h2>
-      <p class="support-copy">A chave Pix ja foi copiada para sua area de transferencia.</p>
+      <p class="support-copy">A chave Pix já foi copiada para sua área de transferência.</p>
       <img
         class="support-qr"
         src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&data=00020126810014BR.GOV.BCB.PIX0136b237ca3a-a7ee-49d6-85a8-972230f557020219Você é o Melhor DEV5204000053039865802BR5925Felipe dos Santos Cavalca6009SAO PAULO62140510cazNXNzZaI6304509B"
