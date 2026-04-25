@@ -1,0 +1,26 @@
+[
+  {
+    "titulo": "Xdebug Profiler Viewer",
+    "descricao": "Extensao do VS Code para abrir, visualizar e navegar por perfis do Xdebug direto no editor.",
+    "url": "https://github.com/Felipe-Cavalca/xdebug-profiler-viewer",
+    "cta": "Abrir"
+  },
+  {
+    "titulo": "TraceSQL",
+    "descricao": "Ferramenta para rastrear e analisar queries SQL, ajudando a identificar gargalos e otimizar performance.",
+    "url": "https://github.com/Felipe-Cavalca/TraceSQL",
+    "cta": "Abrir"
+  },
+  {
+    "titulo": "Dossier",
+    "descricao": "Sistema para armazenamento de arquivos.",
+    "url": "https://github.com/Felipe-Cavalca/Dossier",
+    "cta": "Abrir"
+  },
+  {
+    "titulo": "Bifrost",
+    "descricao": "Templates e pipelines reutilizaveis para frontend, backend e infraestrutura.",
+    "url": "https://github.com/Felipe-Cavalca/Bifrost",
+    "cta": "Abrir"
+  }
+]

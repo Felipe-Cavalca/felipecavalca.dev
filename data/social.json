@@ -1,0 +1,20 @@
+{
+  "github": {
+    "label": "GitHub",
+    "titulo": "Felipe-Cavalca",
+    "descricao": "Repositorios, experimentos, projetos open source e extensoes.",
+    "url": "https://github.com/Felipe-Cavalca"
+  },
+  "email": {
+    "label": "Email",
+    "titulo": "email@felipecavalca.dev",
+    "descricao": "Contato direto para trabalho, ideias e conversas sobre produto.",
+    "url": "mailto:email@felipecavalca.dev"
+  },
+  "x": {
+    "label": "X",
+    "titulo": "@ScriptPlayerDev",
+    "descricao": "Anotacoes publicas, experimentos e o que estou construindo agora.",
+    "url": "https://x.com/ScriptPlayerDev"
+  }
+}

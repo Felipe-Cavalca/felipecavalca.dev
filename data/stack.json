@@ -1,0 +1,6 @@
+{
+  "frontend": ["HTML", "CSS", "JavaScript"],
+  "backend": ["PHP", "APIs REST", "MySql", "PostgreSQL", "Redis"],
+  "infra_fluxo": ["Docker", "GitHub Actions", "Git"],
+  "ferramentas": ["VS Code", "Cloudflare", "Linux"]
+}

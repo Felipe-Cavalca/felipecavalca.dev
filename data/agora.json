@@ -1,0 +1,15 @@
+[
+  {
+    "titulo": "Construindo agora",
+    "descricao": "Evoluindo o TraceSQL para facilitar analise de queries, gargalos e comportamento de consultas em producao.",
+    "ativo": true
+  },
+  {
+    "titulo": "Melhorando processo",
+    "descricao": "Padronizando estrutura de projetos, automacoes de deploy e qualidade de codigo para acelerar entregas com seguranca."
+  },
+  {
+    "titulo": "Objetivo",
+    "descricao": "Lancar versoes mais robustas dos meus projetos open source, com documentacao clara e boa experiencia para devs."
+  }
+]
