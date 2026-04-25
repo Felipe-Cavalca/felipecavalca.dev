@@ -3,7 +3,6 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
-const currentFileTitle = document.getElementById("current-file-title");
 const currentFilePath = document.getElementById("current-file-path");
 const statusFile = document.getElementById("status-file");
 const fileItems = document.querySelectorAll(".file-item");
@@ -31,9 +30,6 @@ function getFileMeta(fileId) {
 }
 
 function updateHeader(meta) {
-  if (currentFileTitle) {
-    currentFileTitle.textContent = meta.title;
-  }
   if (currentFilePath) {
     currentFilePath.textContent = meta.path;
   }

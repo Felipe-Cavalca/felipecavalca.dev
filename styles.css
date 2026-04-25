@@ -124,7 +124,6 @@ button:focus-visible {
 .command-pill,
 .sidebar-label,
 .tree-label,
-.panel-path,
 .editor-toolbar,
 .status-bar,
 .hero-code,
@@ -275,35 +274,6 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   min-height: 0;
-}
-
-.editor-tabs {
-  padding: 0.7rem 0.9rem 0;
-  border-bottom: 1px solid var(--border);
-  background: rgba(13, 17, 23, 0.96);
-}
-
-.editor-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  background: var(--bg-panel);
-  border: 1px solid var(--border);
-  border-bottom: 0;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  padding: 0.76rem 1rem;
-  color: var(--text);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.82rem;
-}
-
-.editor-tab-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  background: var(--accent);
-  box-shadow: 0 0 18px rgba(88, 166, 255, 0.52);
 }
 
 .editor-toolbar {
@@ -620,12 +590,6 @@ h3 {
 
 .panel-heading {
   margin-bottom: 1rem;
-}
-
-.panel-path {
-  margin: 0 0 0.55rem;
-  color: var(--accent);
-  font-size: 0.74rem;
 }
 
 .stack-grid,
