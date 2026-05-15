@@ -3,44 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculadora de Empréstimo Interno</title>
+  <title>Calculadora de Juros</title>
   <style>
     :root {
       color-scheme: light dark;
-      --page-bg: #f4f4f5;
+      --page-bg: #eef4f8;
       --panel-bg: #ffffff;
-      --text: #18181b;
-      --muted: #52525b;
-      --subtle: #71717a;
-      --border: #d4d4d8;
-      --row-border: #e4e4e7;
-      --card-bg: #f4f4f5;
-      --hover-bg: #fafafa;
-      --primary: #18181b;
-      --primary-hover: #3f3f46;
+      --panel-soft: #f4f8fc;
+      --text: #09111f;
+      --muted: #4b5565;
+      --subtle: #667085;
+      --border: rgba(9, 17, 31, 0.14);
+      --row-border: rgba(9, 17, 31, 0.1);
+      --accent: #075bea;
+      --accent-soft: #dceaff;
+      --accent-text: #063fba;
+      --primary: #075bea;
+      --primary-hover: #063fba;
       --primary-text: #ffffff;
       --warning-bg: #fff7ed;
       --warning-text: #9a3412;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --shadow: 0 24px 70px rgba(15, 23, 42, 0.12);
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --page-bg: #09090b;
-        --panel-bg: #18181b;
-        --text: #f4f4f5;
-        --muted: #d4d4d8;
-        --subtle: #a1a1aa;
-        --border: #3f3f46;
-        --row-border: #27272a;
-        --card-bg: #27272a;
-        --hover-bg: #27272a;
-        --primary: #f4f4f5;
-        --primary-hover: #d4d4d8;
-        --primary-text: #18181b;
+        --page-bg: #060a12;
+        --panel-bg: #0f1724;
+        --panel-soft: #162239;
+        --text: #f8fbff;
+        --muted: #d4deec;
+        --subtle: #aeb9c9;
+        --border: rgba(255, 255, 255, 0.12);
+        --row-border: rgba(255, 255, 255, 0.09);
+        --accent: #64d6ff;
+        --accent-soft: #102b3b;
+        --accent-text: #8fe3ff;
+        --primary: #64d6ff;
+        --primary-hover: #8fe3ff;
+        --primary-text: #081221;
         --warning-bg: #431407;
         --warning-text: #fed7aa;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
       }
     }
 
@@ -48,224 +52,377 @@
       box-sizing: border-box;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--page-bg);
-      margin: 0;
-      padding: 32px;
-      color: var(--text);
+    html {
+      min-width: 0;
     }
 
-    .container {
-      max-width: 900px;
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: clamp(16px, 4vw, 40px);
+      background:
+        linear-gradient(rgba(9, 17, 31, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(9, 17, 31, 0.035) 1px, transparent 1px),
+        var(--page-bg);
+      background-size: 42px 42px;
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      width: min(100%, 1040px);
       margin: 0 auto;
-      background: var(--panel-bg);
-      border-radius: 16px;
-      padding: 24px;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: color-mix(in srgb, var(--panel-bg) 94%, transparent);
       box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+      padding: clamp(20px, 4vw, 32px);
+      border-bottom: 1px solid var(--border);
+      background:
+        radial-gradient(circle at 16% 12%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 30%),
+        linear-gradient(135deg, var(--panel-bg), var(--panel-soft));
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent-text);
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
     h1 {
-      margin-top: 0;
-      font-size: 28px;
+      max-width: 12ch;
+      margin: 0;
+      font-size: clamp(2.35rem, 8vw, 4.8rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
     }
 
     .description {
+      max-width: 62ch;
+      margin: 18px 0 0;
       color: var(--muted);
-      margin-bottom: 24px;
-      line-height: 1.5;
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+    }
+
+    .formula-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--accent-soft);
+      padding: 0 14px;
+      color: var(--accent-text);
+      font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .content {
+      display: grid;
+      gap: 22px;
+      padding: clamp(16px, 4vw, 32px);
     }
 
     .form-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      align-items: end;
     }
 
     label {
       display: block;
-      font-weight: bold;
       margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
     }
 
     input {
       width: 100%;
-      padding: 12px;
+      min-height: 48px;
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       background: var(--panel-bg);
       color: var(--text);
-      font-size: 16px;
+      padding: 0 12px;
+      font: inherit;
+      font-size: 1rem;
     }
 
     input:focus {
-      outline: none;
-      border-color: var(--primary);
+      outline: 3px solid color-mix(in srgb, var(--accent) 28%, transparent);
+      border-color: var(--accent);
     }
 
     button {
-      padding: 12px 18px;
-      border: none;
-      border-radius: 10px;
+      width: 100%;
+      min-height: 48px;
+      border: 0;
+      border-radius: 12px;
       background: var(--primary);
       color: var(--primary-text);
-      font-size: 16px;
-      font-weight: bold;
+      padding: 0 18px;
+      font: inherit;
+      font-size: 1rem;
+      font-weight: 800;
       cursor: pointer;
+      transition: transform 0.18s ease, background-color 0.18s ease;
     }
 
     button:hover {
       background: var(--primary-hover);
+      transform: translateY(-1px);
     }
 
     .summary {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
-      margin-bottom: 24px;
     }
 
     .card {
-      background: var(--card-bg);
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--panel-soft);
       padding: 16px;
-      border-radius: 12px;
     }
 
     .card small {
       display: block;
+      margin-bottom: 8px;
       color: var(--subtle);
-      margin-bottom: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .card strong {
-      font-size: 20px;
+      display: block;
+      color: var(--text);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .table-shell {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     table {
       width: 100%;
+      min-width: 720px;
       border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 12px;
     }
 
-    th, td {
-      padding: 12px;
+    th,
+    td {
+      padding: 13px 14px;
       border-bottom: 1px solid var(--row-border);
       text-align: right;
+      white-space: nowrap;
     }
 
-    th:first-child, td:first-child {
+    th:first-child,
+    td:first-child {
       text-align: center;
     }
 
     th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
       background: var(--primary);
       color: var(--primary-text);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
     }
 
     tr:hover td {
-      background: var(--hover-bg);
+      background: color-mix(in srgb, var(--accent) 9%, transparent);
     }
 
     .warning {
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 10px;
+      border: 1px solid color-mix(in srgb, var(--warning-text) 18%, transparent);
+      border-radius: 14px;
       background: var(--warning-bg);
       color: var(--warning-text);
-      font-size: 14px;
-      line-height: 1.4;
+      padding: 14px;
+      font-size: 0.92rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 820px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .formula-chip {
+        width: fit-content;
+      }
+
+      .form-grid,
+      .summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 540px) {
       body {
-        padding: 16px;
+        padding: 0;
+        background-size: 34px 34px;
       }
 
-      .container {
-        padding: 16px;
+      main {
+        width: 100%;
       }
 
-      table {
-        font-size: 14px;
+      .panel {
+        min-height: 100vh;
+        border-width: 0;
+        border-radius: 0;
       }
 
-      th, td {
-        padding: 10px 6px;
+      .hero,
+      .content {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: clamp(2.45rem, 14vw, 3.35rem);
+      }
+
+      .description {
+        font-size: 1rem;
+      }
+
+      .form-grid,
+      .summary {
+        grid-template-columns: 1fr;
+      }
+
+      .table-shell {
+        margin-inline: -18px;
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0;
+      }
+
+      th,
+      td {
+        padding: 12px 10px;
+        font-size: 0.88rem;
       }
     }
   </style>
 </head>
 <body>
-  <main class="container">
-    <h1>Calculadora de Empréstimo Interno</h1>
+  <main>
+    <article class="panel">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Simulador</p>
+          <h1>Calculadora de Juros</h1>
+          <p class="description">
+            Informe o valor inicial, a taxa mensal e o limite de períodos.
+            A tabela mostra o total acumulado, o valor médio por período e o impacto dos juros.
+          </p>
+        </div>
+        <span class="formula-chip">Total = valor x (1 + taxa)^n</span>
+      </header>
 
-    <p class="description">
-      Informe o valor emprestado, a taxa de juros mensal e a quantidade máxima de parcelas.
-      A calculadora mostra quanto você deve devolver no total e o valor médio da parcela.
-    </p>
+      <div class="content">
+        <section class="form-grid" aria-label="Dados para cálculo">
+          <div>
+            <label for="valor">Valor inicial</label>
+            <input id="valor" type="number" min="0" step="0.01" value="1250" inputmode="decimal" />
+          </div>
 
-    <section class="form-grid">
-      <div>
-        <label for="valor">Valor emprestado</label>
-        <input id="valor" type="number" min="0" step="0.01" value="1250" />
+          <div>
+            <label for="taxa">Taxa ao mês (%)</label>
+            <input id="taxa" type="number" min="0" step="0.01" value="10" inputmode="decimal" />
+          </div>
+
+          <div>
+            <label for="parcelas">Máximo de períodos</label>
+            <input id="parcelas" type="number" min="1" max="360" step="1" value="20" inputmode="numeric" />
+          </div>
+
+          <div>
+            <button type="button" onclick="calcular()">Calcular</button>
+          </div>
+        </section>
+
+        <section class="summary" aria-label="Resumo do cálculo">
+          <div class="card">
+            <small>Valor inicial</small>
+            <strong id="resValor">R$ 1.250,00</strong>
+          </div>
+
+          <div class="card">
+            <small>Taxa mensal</small>
+            <strong id="resTaxa">10,00%</strong>
+          </div>
+
+          <div class="card">
+            <small>Menor valor médio</small>
+            <strong id="resMenorParcela">-</strong>
+          </div>
+
+          <div class="card">
+            <small>Opção equilibrada</small>
+            <strong id="resMelhorOpcao">-</strong>
+          </div>
+        </section>
+
+        <div class="table-shell" aria-label="Tabela de resultados">
+          <table>
+            <thead>
+              <tr>
+                <th>Períodos</th>
+                <th>Total acumulado</th>
+                <th>Valor médio</th>
+                <th>Juros acumulado</th>
+                <th>Juros (%)</th>
+              </tr>
+            </thead>
+            <tbody id="resultado"></tbody>
+          </table>
+        </div>
+
+        <div class="warning">
+          Fórmula usada: <strong>Total = Valor x (1 + taxa) ^ períodos</strong>.
+          Depois, o total é dividido pela quantidade de períodos. É uma simulação de juros compostos simples, não uma simulação bancária tradicional de amortização.
+        </div>
       </div>
-
-      <div>
-        <label for="taxa">Taxa ao mês (%)</label>
-        <input id="taxa" type="number" min="0" step="0.01" value="10" />
-      </div>
-
-      <div>
-        <label for="parcelas">Qtd. máxima de parcelas</label>
-        <input id="parcelas" type="number" min="1" max="360" step="1" value="20" />
-      </div>
-
-      <div style="display: flex; align-items: end;">
-        <button onclick="calcular()">Calcular</button>
-      </div>
-    </section>
-
-    <section class="summary">
-      <div class="card">
-        <small>Valor emprestado</small>
-        <strong id="resValor">R$ 1.250,00</strong>
-      </div>
-
-      <div class="card">
-        <small>Taxa mensal</small>
-        <strong id="resTaxa">10,00%</strong>
-      </div>
-
-      <div class="card">
-        <small>Menor parcela</small>
-        <strong id="resMenorParcela">-</strong>
-      </div>
-
-      <div class="card">
-        <small>Melhor opção</small>
-        <strong id="resMelhorOpcao">-</strong>
-      </div>
-    </section>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Parcelas</th>
-          <th>Total devido</th>
-          <th>Valor da parcela</th>
-          <th>Juros total</th>
-          <th>Juros total (%)</th>
-        </tr>
-      </thead>
-      <tbody id="resultado"></tbody>
-    </table>
-
-    <div class="warning">
-      Fórmula usada: <strong>Total = Valor × (1 + taxa) ^ parcelas</strong>.<br />
-      Depois, o total é dividido pela quantidade de parcelas. Isso é uma punição interna, não uma simulação bancária tradicional de amortização.
-    </div>
+    </article>
   </main>
 
   <script>
@@ -286,38 +443,39 @@
     function calcular() {
       const valor = Number(document.getElementById('valor').value);
       const taxaPercentual = Number(document.getElementById('taxa').value);
-      const maxParcelas = Number(document.getElementById('parcelas').value);
+      const maxPeriodos = Number(document.getElementById('parcelas').value);
       const tbody = document.getElementById('resultado');
 
       tbody.innerHTML = '';
 
-      if (!valor || valor <= 0 || taxaPercentual < 0 || !maxParcelas || maxParcelas < 1) {
+      if (!valor || valor <= 0 || taxaPercentual < 0 || !maxPeriodos || maxPeriodos < 1) {
         tbody.innerHTML = '<tr><td colspan="5">Preencha valores válidos.</td></tr>';
         return;
       }
 
       const taxa = taxaPercentual / 100;
-      let menorParcela = Infinity;
-      let menorParcelaQtd = 0;
+      let menorValorMedio = Infinity;
+      let menorValorMedioQtd = 0;
       let melhorOpcao = null;
 
-      for (let n = 1; n <= maxParcelas; n++) {
+      for (let n = 1; n <= maxPeriodos; n++) {
         const total = valor * Math.pow(1 + taxa, n);
-        const parcela = total / n;
+        const valorMedio = total / n;
         const juros = total - valor;
         const jurosPercentual = (juros / valor) * 100;
 
-        if (parcela < menorParcela) {
-          menorParcela = parcela;
-          menorParcelaQtd = n;
+        if (valorMedio < menorValorMedio) {
+          menorValorMedio = valorMedio;
+          menorValorMedioQtd = n;
         }
-        const score = parcela + (juros * 0.15) + (n * 8);
+
+        const score = valorMedio + (juros * 0.15) + (n * 8);
 
         if (!melhorOpcao || score < melhorOpcao.score) {
           melhorOpcao = {
-            parcelas: n,
+            periodos: n,
             total,
-            parcela,
+            valorMedio,
             juros,
             score
           };
@@ -327,7 +485,7 @@
         tr.innerHTML = `
           <td>${n}x</td>
           <td>${formatarMoeda(total)}</td>
-          <td>${formatarMoeda(parcela)}</td>
+          <td>${formatarMoeda(valorMedio)}</td>
           <td>${formatarMoeda(juros)}</td>
           <td>${formatarPercentual(jurosPercentual)}</td>
         `;
@@ -336,8 +494,8 @@
 
       document.getElementById('resValor').textContent = formatarMoeda(valor);
       document.getElementById('resTaxa').textContent = formatarPercentual(taxaPercentual);
-      document.getElementById('resMenorParcela').textContent = `${formatarMoeda(menorParcela)} em ${menorParcelaQtd}x`;
-      document.getElementById('resMelhorOpcao').textContent = `${melhorOpcao.parcelas}x de ${formatarMoeda(melhorOpcao.parcela)}`;
+      document.getElementById('resMenorParcela').textContent = `${formatarMoeda(menorValorMedio)} em ${menorValorMedioQtd}x`;
+      document.getElementById('resMelhorOpcao').textContent = `${melhorOpcao.periodos}x de ${formatarMoeda(melhorOpcao.valorMedio)}`;
     }
 
     calcular();
