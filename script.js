@@ -18,6 +18,7 @@ const projectList = document.getElementById("project-list");
 const projetosJsonPreview = document.getElementById("projetos-json-preview");
 const socialGrid = document.getElementById("social-grid");
 const socialJsonPreview = document.getElementById("social-json-preview");
+const scrollLinks = document.querySelectorAll("[data-scroll-link]");
 let activeFile = "sobre-md";
 let leavingPanel = null;
 
@@ -245,6 +246,20 @@ if (editorStage) {
     editorStage.style.setProperty("--mouse-y", `${y}%`);
   });
 }
+
+scrollLinks.forEach(link => {
+  link.addEventListener("click", event => {
+    const targetId = link.getAttribute("href");
+    if (!targetId?.startsWith("#")) return;
+
+    const target = document.querySelector(targetId);
+    if (!target) return;
+
+    event.preventDefault();
+    document.body.classList.remove("lock-scroll");
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
 
 function bindHoverGlow() {
   document.querySelectorAll(".hover-glow").forEach(node => {

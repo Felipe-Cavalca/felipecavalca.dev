@@ -3,196 +3,138 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Felipe Cavalca | Pagina pessoal</title>
-  <meta name="description" content="Pagina pessoal de Felipe Cavalca com projetos, bio e contatos.">
+  <title>Felipe Cavalca | Página pessoal</title>
+  <meta name="description" content="Página pessoal de Felipe Cavalca com projetos, bio e contatos.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <div class="app-shell">
-    <header class="window-bar">
-      <div class="window-controls" aria-hidden="true">
-        <span class="window-dot window-dot-close"></span>
-        <span class="window-dot window-dot-minimize"></span>
-        <span class="window-dot window-dot-expand"></span>
-      </div>
-      <div class="window-title">felipecavalca.dev</div>
-      <div class="command-pill" aria-hidden="true">Portfolio workspace</div>
-    </header>
+<body class="lock-scroll">
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Felipe Cavalca">
+      <img src="assets/favicon.svg" alt="" width="32" height="32">
+      <span>Felipe Cavalca</span>
+    </a>
 
-    <div class="workbench">
-      <aside class="sidebar">
-        <div class="sidebar-panel">
-          <p class="sidebar-label">Explorer</p>
-          <a class="sidebar-brand" href="#" data-target="sobre-md">
-            <img src="assets/favicon.svg" alt="" width="36" height="36">
-            <span>Felipe Cavalca</span>
-          </a>
-          <div class="tree-group">
-            <p class="tree-label">src/profile</p>
-            <div class="file-tree" aria-label="Arquivos do portfolio">
-              <button class="file-item is-active" type="button" data-target="sobre-md" data-title="sobre.md" data-path="src/profile/sobre.md">
-                <span class="file-icon">#</span>
-                <span>sobre.md</span>
-              </button>
-              <button class="file-item" type="button" data-target="stack-json" data-title="stack.json" data-path="src/profile/stack.json">
-                <span class="file-icon">{ }</span>
-                <span>stack.json</span>
-              </button>
-              <button class="file-item" type="button" data-target="agora-log" data-title="agora.log" data-path="src/profile/agora.log">
-                <span class="file-icon">~</span>
-                <span>agora.log</span>
-              </button>
-              <button class="file-item" type="button" data-target="projetos-ts" data-title="projetos.ts" data-path="src/projects/projetos.ts">
-                <span class="file-icon">&lt;/&gt;</span>
-                <span>projetos.ts</span>
-              </button>
-              <button class="file-item" type="button" data-target="pix-json" data-title="pix.json" data-path="src/support/pix.json">
-                <span class="file-icon">$</span>
-                <span>pix.json</span>
-              </button>
-              <button class="file-item" type="button" data-target="social-yml" data-title="social.yml" data-path="src/social/social.yml">
-                <span class="file-icon">@</span>
-                <span>social.yml</span>
-              </button>
-            </div>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#detalhes" data-scroll-link>Detalhes</a>
+      <a href="#contato" data-scroll-link>Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="business-card" aria-label="Cartão de visitas de Felipe Cavalca">
+        <div class="business-card-mark">
+          <img class="profile-logo" src="assets/felipecavalca-logo-mark.svg" alt="Logo Felipe Cavalca" width="240" height="77">
+        </div>
+
+        <div class="business-card-main">
+          <h1 id="hero-title">Felipe Cavalca</h1>
+          <p class="hero-subtitle">Desenvolvedor fullstack</p>
+          <p class="business-card-note">Interfaces, backend e produtos web simples de evoluir.</p>
+        </div>
+
+        <dl class="business-card-details">
+          <div>
+            <dt>Email</dt>
+            <dd><a href="mailto:contato@felipecavalca.dev">contato@felipecavalca.dev</a></dd>
           </div>
-        </div>
+          <div>
+            <dt>Site</dt>
+            <dd>felipecavalca.dev</dd>
+          </div>
+          <div>
+            <dt>Foco</dt>
+            <dd>Web, performance e UX</dd>
+          </div>
+        </dl>
+      </div>
 
-        <div class="sidebar-panel sidebar-panel-muted">
-          <p class="sidebar-label">Workspace</p>
-          <ul class="status-list">
-            <li><span>Status</span><strong>online</strong></li>
-            <li><span>Foco</span><strong>web + performance</strong></li>
-            <li><span>Estilo</span><strong>VS Code inspired</strong></li>
-          </ul>
-        </div>
-      </aside>
+      <a class="button button-primary hero-more" href="#detalhes" data-scroll-link>
+        <span>Ver mais</span>
+        <span class="button-arrow" aria-hidden="true"></span>
+      </a>
+    </section>
 
-      <main class="editor">
-        <div class="editor-toolbar">
-          <span id="current-file-path">src/profile/sobre.md</span>
-          <span>Portfolio workspace</span>
-        </div>
+    <section class="section two-columns" id="detalhes" aria-labelledby="sobre-title">
+      <div>
+        <p class="section-label">Sobre</p>
+        <h2 id="sobre-title">Construo com simplicidade e intenção.</h2>
+      </div>
+      <div class="copy-block">
+        <p>
+          Atuo profissionalmente como CLT e mantenho projetos próprios como laboratório para
+          validar arquitetura, padrões e evolução contínua.
+        </p>
+        <p>
+          Minha base passa por PHP, HTML, CSS, JavaScript e SQL, com atenção ao fluxo completo
+          entre regra de negócio, interface e entrega.
+        </p>
+      </div>
+    </section>
 
-        <div class="mobile-file-strip" aria-label="Arquivos mobile">
-          <button class="mobile-file-item is-active" type="button" data-target="sobre-md">sobre.md</button>
-          <button class="mobile-file-item" type="button" data-target="stack-json">stack.json</button>
-          <button class="mobile-file-item" type="button" data-target="agora-log">agora.log</button>
-          <button class="mobile-file-item" type="button" data-target="projetos-ts">projetos.ts</button>
-          <button class="mobile-file-item" type="button" data-target="pix-json">pix.json</button>
-          <button class="mobile-file-item" type="button" data-target="social-yml">social.yml</button>
-        </div>
+    <section class="section" aria-labelledby="stack-title">
+      <div class="section-heading">
+        <p class="section-label">Stack</p>
+        <h2 id="stack-title">Ferramentas que uso no dia a dia.</h2>
+      </div>
 
-        <div class="editor-stage" id="editor-stage">
-          <section class="file-panel is-active" data-file="sobre-md">
-            <div class="hero-block hover-glow">
-              <div class="hero-code">
-                <span class="code-line"><span class="line-key">const</span> <span class="line-name">developer</span> = <span class="line-string">"Felipe Cavalca"</span>;</span>
-                <span class="code-line"><span class="line-key">const</span> <span class="line-name">focus</span> = [<span class="line-string">"performance"</span>, <span class="line-string">"design"</span>, <span class="line-string">"simplicidade"</span>];</span>
-                <span class="code-line"><span class="line-key">export</span> <span class="line-name">default</span> <span class="line-string">"fullstack-dev"</span>;</span>
-              </div>
-              <img class="hero-logo" src="assets/logo.svg" alt="Logo Felipe Cavalca" width="128" height="128">
-              <p class="eyebrow">sobre.md</p>
-              <h1>Construindo software com foco em clareza, performance e bons detalhes.</h1>
-              <p class="lead">Sou desenvolvedor fullstack e construo produtos com foco em performance, organizacao e experiencia.</p>
-            </div>
+      <div class="stack-grid" id="stack-grid"></div>
+      <pre class="inline-snippet sr-only" aria-hidden="true"><code id="stack-json-preview"></code></pre>
+    </section>
 
-            <div class="content-grid">
-              <article class="info-card hover-glow">
-                <h2>Sobre mim</h2>
-                <p>
-                  Atuo profissionalmente como CLT e, em paralelo, desenvolvo projetos proprios como laboratorio para validar arquitetura,
-                  padroes e evolucao continua.
-                </p>
-                <p>
-                  Trabalho principalmente com PHP, HTML, CSS, JavaScript e SQL, com atencao tanto para backend quanto para interface.
-                </p>
-              </article>
+    <section class="section" aria-labelledby="agora-title">
+      <div class="section-heading">
+        <p class="section-label">Agora</p>
+        <h2 id="agora-title">No que estou focado.</h2>
+      </div>
 
-              <article class="info-card info-card-highlight hover-glow">
-                <h2>Como eu penso</h2>
-                <p>Prefiro estrutura clara, codigo previsivel e interfaces que passem intencao logo no primeiro contato.</p>
-                <pre class="inline-snippet"><code>if (codigo === "limpo") {
-  performance++;
-  manutencao++;
-}</code></pre>
-                <div class="mini-tags">
-                  <span>clean code</span>
-                  <span>UX</span>
-                  <span>performance</span>
-                </div>
-              </article>
-            </div>
-          </section>
+      <div class="timeline-list" id="agora-list"></div>
+      <pre class="inline-snippet sr-only" aria-hidden="true"><code id="agora-json-preview"></code></pre>
+    </section>
 
-          <section class="file-panel" data-file="stack-json">
-            <div class="panel-heading">
-              <h2>Stack</h2>
-            </div>
-            <pre class="inline-snippet inline-snippet-wide"><code id="stack-json-preview"></code></pre>
-            <div class="stack-grid" id="stack-grid"></div>
-          </section>
+    <section class="section" id="projetos" aria-labelledby="projetos-title">
+      <div class="section-heading">
+        <p class="section-label">Projetos</p>
+        <h2 id="projetos-title">Alguns trabalhos em destaque.</h2>
+      </div>
 
-          <section class="file-panel" data-file="agora-log">
-            <div class="panel-heading">
-              <h2>Agora</h2>
-            </div>
-            <pre class="inline-snippet inline-snippet-wide"><code id="agora-json-preview"></code></pre>
-            <div class="timeline-list" id="agora-list"></div>
-          </section>
+      <ul class="project-list" id="project-list"></ul>
+      <pre class="inline-snippet sr-only" aria-hidden="true"><code id="projetos-json-preview"></code></pre>
+    </section>
 
-          <section class="file-panel" data-file="projetos-ts">
-            <div class="panel-heading">
-              <h2>Projetos em destaque</h2>
-            </div>
-            <pre class="inline-snippet inline-snippet-wide"><code id="projetos-json-preview"></code></pre>
-            <ul class="project-list" id="project-list"></ul>
-          </section>
+    <section class="section support-section" aria-labelledby="pix-title">
+      <div>
+        <p class="section-label">Pix</p>
+        <h2 id="pix-title">Apoie meus projetos.</h2>
+        <p class="support-copy" id="pix-feedback">Clique para copiar a chave Pix.</p>
+      </div>
 
-          <section class="file-panel" data-file="pix-json">
-            <div class="panel-heading">
-              <h2>Pix</h2>
-            </div>
-            <div class="support-layout">
-              <div class="support-card">
-                <p class="support-copy-label">Chave</p>
-                <code class="pix-key">pix@felipecavalca.dev</code>
-                <p class="support-copy" id="pix-feedback">Clique para copiar a chave Pix.</p>
-                <button class="btn btn-primary" id="pix-copy-btn" type="button">Copiar chave Pix</button>
-              </div>
-              <div class="support-card support-card-qr">
-                <img
-                  class="support-qr"
-                  src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&data=00020126810014BR.GOV.BCB.PIX0136b237ca3a-a7ee-49d6-85a8-972230f557020219Voce%20e%20o%20Melhor%20DEV5204000053039865802BR5925Felipe%20dos%20Santos%20Cavalca6009SAO%20PAULO62140510cazNXNzZaI6304509B"
-                  alt="QR Code do Pix pix@felipecavalca.dev"
-                  loading="lazy"
-                >
-              </div>
-            </div>
-          </section>
+      <div class="support-card">
+        <span class="support-copy-label">Chave Pix</span>
+        <code class="pix-key">pix@felipecavalca.dev</code>
+        <button class="button button-primary" id="pix-copy-btn" type="button">Copiar chave</button>
+      </div>
+    </section>
 
-          <section class="file-panel" data-file="social-yml">
-            <div class="panel-heading">
-              <h2>Social</h2>
-            </div>
-            <pre class="inline-snippet inline-snippet-wide"><code id="social-json-preview"></code></pre>
-            <div class="social-grid" id="social-grid"></div>
-          </section>
-        </div>
-      </main>
-    </div>
+    <section class="section" id="contato" aria-labelledby="contato-title">
+      <div class="section-heading">
+        <p class="section-label">Contato</p>
+        <h2 id="contato-title">Onde me encontrar.</h2>
+      </div>
 
-    <footer class="status-bar">
-      <small>main</small>
-      <small id="status-file">sobre.md</small>
-      <small>UTF-8</small>
-      <small>&copy; <span id="year"></span> Felipe Cavalca</small>
-    </footer>
-  </div>
+      <div class="social-grid" id="social-grid"></div>
+      <pre class="inline-snippet sr-only" aria-hidden="true"><code id="social-json-preview"></code></pre>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>&copy; <span id="year"></span> Felipe Cavalca</span>
+    <a href="mailto:contato@felipecavalca.dev">contato@felipecavalca.dev</a>
+  </footer>
 
   <script src="script.js"></script>
 </body>
