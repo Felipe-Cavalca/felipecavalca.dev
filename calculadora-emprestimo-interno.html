@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Empréstimo Interno</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --page-bg: #f4f4f5;
+      --panel-bg: #ffffff;
+      --text: #18181b;
+      --muted: #52525b;
+      --subtle: #71717a;
+      --border: #d4d4d8;
+      --row-border: #e4e4e7;
+      --card-bg: #f4f4f5;
+      --hover-bg: #fafafa;
+      --primary: #18181b;
+      --primary-hover: #3f3f46;
+      --primary-text: #ffffff;
+      --warning-bg: #fff7ed;
+      --warning-text: #9a3412;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --page-bg: #09090b;
+        --panel-bg: #18181b;
+        --text: #f4f4f5;
+        --muted: #d4d4d8;
+        --subtle: #a1a1aa;
+        --border: #3f3f46;
+        --row-border: #27272a;
+        --card-bg: #27272a;
+        --hover-bg: #27272a;
+        --primary: #f4f4f5;
+        --primary-hover: #d4d4d8;
+        --primary-text: #18181b;
+        --warning-bg: #431407;
+        --warning-text: #fed7aa;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--page-bg);
+      margin: 0;
+      padding: 32px;
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--panel-bg);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .description {
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel-bg);
+      color: var(--text);
+      font-size: 16px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    button {
+      padding: 12px 18px;
+      border: none;
+      border-radius: 10px;
+      background: var(--primary);
+      color: var(--primary-text);
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--primary-hover);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 16px;
+      border-radius: 12px;
+    }
+
+    .card small {
+      display: block;
+      color: var(--subtle);
+      margin-bottom: 6px;
+    }
+
+    .card strong {
+      font-size: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--row-border);
+      text-align: right;
+    }
+
+    th:first-child, td:first-child {
+      text-align: center;
+    }
+
+    th {
+      background: var(--primary);
+      color: var(--primary-text);
+    }
+
+    tr:hover td {
+      background: var(--hover-bg);
+    }
+
+    .warning {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      background: var(--warning-bg);
+      color: var(--warning-text);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .container {
+        padding: 16px;
+      }
+
+      table {
+        font-size: 14px;
+      }
+
+      th, td {
+        padding: 10px 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Calculadora de Empréstimo Interno</h1>
+
+    <p class="description">
+      Informe o valor emprestado, a taxa de juros mensal e a quantidade máxima de parcelas.
+      A calculadora mostra quanto você deve devolver no total e o valor médio da parcela.
+    </p>
+
+    <section class="form-grid">
+      <div>
+        <label for="valor">Valor emprestado</label>
+        <input id="valor" type="number" min="0" step="0.01" value="1250" />
+      </div>
+
+      <div>
+        <label for="taxa">Taxa ao mês (%)</label>
+        <input id="taxa" type="number" min="0" step="0.01" value="10" />
+      </div>
+
+      <div>
+        <label for="parcelas">Qtd. máxima de parcelas</label>
+        <input id="parcelas" type="number" min="1" max="360" step="1" value="20" />
+      </div>
+
+      <div style="display: flex; align-items: end;">
+        <button onclick="calcular()">Calcular</button>
+      </div>
+    </section>
+
+    <section class="summary">
+      <div class="card">
+        <small>Valor emprestado</small>
+        <strong id="resValor">R$ 1.250,00</strong>
+      </div>
+
+      <div class="card">
+        <small>Taxa mensal</small>
+        <strong id="resTaxa">10,00%</strong>
+      </div>
+
+      <div class="card">
+        <small>Menor parcela</small>
+        <strong id="resMenorParcela">-</strong>
+      </div>
+
+      <div class="card">
+        <small>Melhor opção</small>
+        <strong id="resMelhorOpcao">-</strong>
+      </div>
+    </section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Parcelas</th>
+          <th>Total devido</th>
+          <th>Valor da parcela</th>
+          <th>Juros total</th>
+          <th>Juros total (%)</th>
+        </tr>
+      </thead>
+      <tbody id="resultado"></tbody>
+    </table>
+
+    <div class="warning">
+      Fórmula usada: <strong>Total = Valor × (1 + taxa) ^ parcelas</strong>.<br />
+      Depois, o total é dividido pela quantidade de parcelas. Isso é uma punição interna, não uma simulação bancária tradicional de amortização.
+    </div>
+  </main>
+
+  <script>
+    function formatarMoeda(valor) {
+      return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    }
+
+    function formatarPercentual(valor) {
+      return valor.toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      }) + '%';
+    }
+
+    function calcular() {
+      const valor = Number(document.getElementById('valor').value);
+      const taxaPercentual = Number(document.getElementById('taxa').value);
+      const maxParcelas = Number(document.getElementById('parcelas').value);
+      const tbody = document.getElementById('resultado');
+
+      tbody.innerHTML = '';
+
+      if (!valor || valor <= 0 || taxaPercentual < 0 || !maxParcelas || maxParcelas < 1) {
+        tbody.innerHTML = '<tr><td colspan="5">Preencha valores válidos.</td></tr>';
+        return;
+      }
+
+      const taxa = taxaPercentual / 100;
+      let menorParcela = Infinity;
+      let menorParcelaQtd = 0;
+      let melhorOpcao = null;
+
+      for (let n = 1; n <= maxParcelas; n++) {
+        const total = valor * Math.pow(1 + taxa, n);
+        const parcela = total / n;
+        const juros = total - valor;
+        const jurosPercentual = (juros / valor) * 100;
+
+        if (parcela < menorParcela) {
+          menorParcela = parcela;
+          menorParcelaQtd = n;
+        }
+        const score = parcela + (juros * 0.15) + (n * 8);
+
+        if (!melhorOpcao || score < melhorOpcao.score) {
+          melhorOpcao = {
+            parcelas: n,
+            total,
+            parcela,
+            juros,
+            score
+          };
+        }
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${n}x</td>
+          <td>${formatarMoeda(total)}</td>
+          <td>${formatarMoeda(parcela)}</td>
+          <td>${formatarMoeda(juros)}</td>
+          <td>${formatarPercentual(jurosPercentual)}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById('resValor').textContent = formatarMoeda(valor);
+      document.getElementById('resTaxa').textContent = formatarPercentual(taxaPercentual);
+      document.getElementById('resMenorParcela').textContent = `${formatarMoeda(menorParcela)} em ${menorParcelaQtd}x`;
+      document.getElementById('resMelhorOpcao').textContent = `${melhorOpcao.parcelas}x de ${formatarMoeda(melhorOpcao.parcela)}`;
+    }
+
+    calcular();
+  </script>
+</body>
+</html>
