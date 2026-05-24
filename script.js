@@ -3,206 +3,113 @@ if (yearEl) {
   yearEl.textContent = String(new Date().getFullYear());
 }
 
-const currentFilePath = document.getElementById("current-file-path");
-const statusFile = document.getElementById("status-file");
-const fileItems = document.querySelectorAll(".file-item");
-const mobileFileItems = document.querySelectorAll(".mobile-file-item");
-const editorStage = document.getElementById("editor-stage");
-const pixCopyBtn = document.getElementById("pix-copy-btn");
-const pixFeedback = document.getElementById("pix-feedback");
-const stackGrid = document.getElementById("stack-grid");
-const stackJsonPreview = document.getElementById("stack-json-preview");
-const agoraList = document.getElementById("agora-list");
-const agoraJsonPreview = document.getElementById("agora-json-preview");
-const projectList = document.getElementById("project-list");
-const projetosJsonPreview = document.getElementById("projetos-json-preview");
-const socialGrid = document.getElementById("social-grid");
-const socialJsonPreview = document.getElementById("social-json-preview");
-const scrollLinks = document.querySelectorAll("[data-scroll-link]");
-let activeFile = "sobre-md";
-let leavingPanel = null;
-
-function getFileMeta(fileId) {
-  const source = document.querySelector(`.file-item[data-target="${fileId}"]`);
-  return {
-    title: source?.dataset.title ?? "arquivo",
-    path: source?.dataset.path ?? "src/profile/arquivo",
-  };
-}
-
-function updateHeader(meta) {
-  if (currentFilePath) {
-    currentFilePath.textContent = meta.path;
-  }
-  if (statusFile) {
-    statusFile.textContent = meta.title;
-  }
-}
-
-function setActiveStates(fileId) {
-  fileItems.forEach(item => {
-    item.classList.toggle("is-active", item.dataset.target === fileId);
-  });
-
-  mobileFileItems.forEach(item => {
-    item.classList.toggle("is-active", item.dataset.target === fileId);
-  });
-}
-
-function showFile(fileId) {
-  if (fileId === activeFile) return;
-
-  const nextPanel = document.querySelector(`.file-panel[data-file="${fileId}"]`);
-  const currentPanel = document.querySelector(`.file-panel[data-file="${activeFile}"]`);
-  if (!nextPanel || !currentPanel) return;
-
-  if (leavingPanel) {
-    leavingPanel.classList.remove("is-leaving");
-  }
-
-  leavingPanel = currentPanel;
-  currentPanel.classList.remove("is-active");
-  currentPanel.classList.add("is-leaving");
-
-  nextPanel.classList.add("is-active");
-
-  window.setTimeout(() => {
-    if (leavingPanel) {
-      leavingPanel.classList.remove("is-leaving");
-      leavingPanel = null;
-    }
-  }, 360);
-
-  activeFile = fileId;
-  setActiveStates(fileId);
-  updateHeader(getFileMeta(fileId));
-}
-
-function bindFileNavigation(nodeList) {
-  nodeList.forEach(node => {
-    node.addEventListener("click", event => {
-      event.preventDefault();
-      const target = node.dataset.target;
-      if (target) {
-        showFile(target);
+const reveals = document.querySelectorAll(".reveal");
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
       }
     });
-  });
+  },
+  { threshold: 0.15 }
+);
+reveals.forEach(node => observer.observe(node));
+
+const accentPalettes = {
+  light: [
+    {
+      shapeA: "#ff7b54",
+      shapeB: "#f59e0b",
+      gradA: "#ffd9ba",
+      gradB: "#ffd6d6"
+    },
+    {
+      shapeA: "#ef476f",
+      shapeB: "#f4a261",
+      gradA: "#ffd8e1",
+      gradB: "#ffe3c4"
+    },
+    {
+      shapeA: "#e76f51",
+      shapeB: "#2a9d8f",
+      gradA: "#ffd8cc",
+      gradB: "#d9f4ef"
+    },
+    {
+      shapeA: "#3a86ff",
+      shapeB: "#ffbe0b",
+      gradA: "#dbe9ff",
+      gradB: "#fff1c7"
+    }
+  ],
+  dark: [
+    {
+      shapeA: "#d85a4a",
+      shapeB: "#d68b2a",
+      gradA: "#1c2a3a",
+      gradB: "#2f1f31"
+    },
+    {
+      shapeA: "#c84f7a",
+      shapeB: "#c07a2b",
+      gradA: "#221a2f",
+      gradB: "#2f2218"
+    },
+    {
+      shapeA: "#4d7fd6",
+      shapeB: "#b6732c",
+      gradA: "#18273b",
+      gradB: "#2a2232"
+    },
+    {
+      shapeA: "#2f9c8f",
+      shapeB: "#cf6a4f",
+      gradA: "#152b2d",
+      gradB: "#2d1f28"
+    }
+  ]
+};
+
+function applyRandomAccentPalette() {
+  const isDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
+  const mode = isDark ? "dark" : "light";
+  const palettes = accentPalettes[mode];
+  const choice = palettes[Math.floor(Math.random() * palettes.length)];
+  const root = document.documentElement;
+
+  root.style.setProperty("--shape-a", choice.shapeA);
+  root.style.setProperty("--shape-b", choice.shapeB);
+  root.style.setProperty("--bg-grad-a", choice.gradA);
+  root.style.setProperty("--bg-grad-b", choice.gradB);
 }
 
-bindFileNavigation(fileItems);
-bindFileNavigation(mobileFileItems);
-bindFileNavigation(document.querySelectorAll("[data-target].sidebar-brand"));
+applyRandomAccentPalette();
 
-function titleize(key) {
-  return key
-    .replaceAll("_", " ")
-    .replace(/\b\w/g, char => char.toUpperCase());
-}
+const colorSchemeMedia = window.matchMedia?.("(prefers-color-scheme: dark)");
+if (colorSchemeMedia) {
+  const handleSchemeChange = () => {
+    applyRandomAccentPalette();
+  };
 
-function formatJson(data) {
-  return JSON.stringify(data, null, 2);
-}
-
-function renderStack(data) {
-  if (stackJsonPreview) {
-    stackJsonPreview.textContent = formatJson(data);
-  }
-  if (!stackGrid) return;
-
-  stackGrid.innerHTML = Object.entries(data)
-    .map(([key, items]) => `
-      <article class="stack-item hover-glow">
-        <h3>${titleize(key)}</h3>
-        <ul class="chip-list">
-          ${items.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-      </article>
-    `)
-    .join("");
-}
-
-function renderAgora(data) {
-  if (agoraJsonPreview) {
-    agoraJsonPreview.textContent = formatJson(data);
-  }
-  if (!agoraList) return;
-
-  agoraList.innerHTML = data
-    .map(item => `
-      <article class="timeline-item hover-glow">
-        <span class="timeline-dot${item.ativo ? " timeline-dot-live" : ""}"></span>
-        <div>
-          <h3>${item.titulo}</h3>
-          <p>${item.descricao}</p>
-        </div>
-      </article>
-    `)
-    .join("");
-}
-
-function renderProjetos(data) {
-  if (projetosJsonPreview) {
-    projetosJsonPreview.textContent = formatJson(data);
-  }
-  if (!projectList) return;
-
-  projectList.innerHTML = data
-    .map(item => `
-      <li class="hover-glow">
-        <h3>${item.titulo}</h3>
-        <p>${item.descricao}</p>
-        <a href="${item.url}" target="_blank" rel="noreferrer">${item.cta}</a>
-      </li>
-    `)
-    .join("");
-}
-
-function renderSocial(data) {
-  if (socialJsonPreview) {
-    socialJsonPreview.textContent = formatJson(data);
-  }
-  if (!socialGrid) return;
-
-  socialGrid.innerHTML = Object.values(data)
-    .map(item => `
-      <a class="social-card hover-glow" href="${item.url}" ${item.url.startsWith("http") ? 'target="_blank" rel="noreferrer"' : ""}>
-        <span class="social-label">${item.label}</span>
-        <strong>${item.titulo}</strong>
-        <p>${item.descricao}</p>
-      </a>
-    `)
-    .join("");
-}
-
-async function loadJson(path) {
-  const response = await fetch(path);
-  if (!response.ok) {
-    throw new Error(`Falha ao carregar ${path}`);
-  }
-  return response.json();
-}
-
-async function loadDataPanels() {
-  try {
-    const [stack, agora, projetos, social] = await Promise.all([
-      loadJson("data/stack.json"),
-      loadJson("data/agora.json"),
-      loadJson("data/projetos.json"),
-      loadJson("data/social.json"),
-    ]);
-
-    renderStack(stack);
-    renderAgora(agora);
-    renderProjetos(projetos);
-    renderSocial(social);
-    bindHoverGlow();
-  } catch (_error) {
-    // Se algo falhar, a estrutura da pagina continua utilizavel.
+  if (typeof colorSchemeMedia.addEventListener === "function") {
+    colorSchemeMedia.addEventListener("change", handleSchemeChange);
+  } else if (typeof colorSchemeMedia.addListener === "function") {
+    colorSchemeMedia.addListener(handleSchemeChange);
   }
 }
 
 const PIX_KEY = "pix@felipecavalca.dev";
+const supportBtn = document.getElementById("support-btn");
+const supportModal = document.getElementById("support-modal");
+const supportClose = document.getElementById("support-close");
+const supportCopyText = document.querySelector(".support-copy");
+
+function setSupportMessage(message) {
+  if (supportCopyText) {
+    supportCopyText.textContent = message;
+  }
+}
 
 async function copyPixKey() {
   try {
@@ -226,56 +133,84 @@ async function copyPixKey() {
   return copied;
 }
 
-if (pixCopyBtn) {
-  pixCopyBtn.addEventListener("click", async () => {
-    const copied = await copyPixKey();
-    if (pixFeedback) {
-      pixFeedback.textContent = copied
-        ? "Chave Pix copiada para a area de transferencia."
-        : "Nao foi possivel copiar automaticamente. Use a chave exibida acima.";
+async function openSupportModal() {
+  if (!supportModal) return;
+  supportModal.classList.add("is-open");
+  supportModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  const copied = await copyPixKey();
+  setSupportMessage(
+    copied
+      ? "A chave Pix ja foi copiada para sua area de transferencia."
+      : "Nao foi possivel copiar automaticamente. Use a chave abaixo."
+  );
+}
+
+function closeSupportModal() {
+  if (!supportModal) return;
+  supportModal.classList.remove("is-open");
+  supportModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+if (supportBtn) {
+  supportBtn.addEventListener("click", () => {
+    openSupportModal();
+  });
+}
+
+if (supportClose) {
+  supportClose.addEventListener("click", () => {
+    closeSupportModal();
+  });
+}
+
+if (supportModal) {
+  supportModal.addEventListener("click", event => {
+    if (event.target === supportModal) {
+      closeSupportModal();
     }
   });
 }
 
-if (editorStage) {
-  editorStage.addEventListener("pointermove", event => {
-    const rect = editorStage.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
-    editorStage.style.setProperty("--mouse-x", `${x}%`);
-    editorStage.style.setProperty("--mouse-y", `${y}%`);
-  });
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closeSupportModal();
+  }
+});
+
+function flashSection(target) {
+  if (!target) return;
+  target.classList.remove("section-flash");
+  // Force reflow so repeated clicks retrigger the animation.
+  void target.offsetWidth;
+  target.classList.add("section-flash");
+  target.addEventListener(
+    "animationend",
+    () => {
+      target.classList.remove("section-flash");
+    },
+    { once: true }
+  );
 }
 
-scrollLinks.forEach(link => {
-  link.addEventListener("click", event => {
-    const targetId = link.getAttribute("href");
-    if (!targetId?.startsWith("#")) return;
-
-    const target = document.querySelector(targetId);
+const sectionButtons = document.querySelectorAll(".btn-section[href^='#']");
+sectionButtons.forEach(button => {
+  button.addEventListener("click", event => {
+    const href = button.getAttribute("href");
+    if (!href || href === "#") return;
+    const target = document.querySelector(href);
     if (!target) return;
 
     event.preventDefault();
-    document.body.classList.remove("lock-scroll");
     target.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", href);
+
+    const distance = Math.abs(target.getBoundingClientRect().top);
+    const delay = Math.min(900, Math.max(280, distance * 0.35));
+    window.setTimeout(() => {
+      flashSection(target);
+    }, delay);
   });
 });
-
-function bindHoverGlow() {
-  document.querySelectorAll(".hover-glow").forEach(node => {
-    if (node.dataset.glowBound === "true") return;
-    node.dataset.glowBound = "true";
-    node.addEventListener("pointermove", event => {
-      const rect = node.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width) * 100;
-      const y = ((event.clientY - rect.top) / rect.height) * 100;
-      node.style.setProperty("--glow-x", `${x}%`);
-      node.style.setProperty("--glow-y", `${y}%`);
-    });
-  });
-}
-
-updateHeader(getFileMeta(activeFile));
-setActiveStates(activeFile);
-bindHoverGlow();
-loadDataPanels();
