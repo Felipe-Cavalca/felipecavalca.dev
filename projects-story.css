@@ -1,0 +1,302 @@
+/* Scroll-driven project showcase layered on top of the base project styles. */
+
+.project-story {
+  --project-card-progress: 0;
+  width: 100%;
+  max-width: none;
+  height: 540vh;
+  margin: 0;
+  padding: 0;
+  display: block;
+  position: relative;
+}
+
+.projects-sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  width: min(1240px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 6.8rem 0 1.4rem;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(1.2rem, 2.7vh, 2rem);
+  overflow: hidden;
+}
+
+.project-story-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+}
+
+.project-story .section-heading {
+  margin: 0;
+  max-width: 850px;
+  transition: transform .45s ease, opacity .45s ease;
+}
+
+.project-story .section-heading .kicker {
+  margin-bottom: .55rem;
+}
+
+.project-story .section-heading h2 {
+  font-size: clamp(2.4rem, 5vw, 5.4rem);
+  line-height: .9;
+}
+
+.project-story-status {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  padding-bottom: .45rem;
+  color: var(--muted);
+  font: 500 .72rem/1 "IBM Plex Mono", monospace;
+  letter-spacing: .08em;
+}
+
+.project-story-status strong {
+  min-width: 1.5rem;
+  color: var(--text);
+  font-size: .82rem;
+}
+
+.project-dots {
+  display: flex;
+  gap: .36rem;
+  margin-left: .35rem;
+}
+
+.project-dot {
+  width: 1.35rem;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.16);
+  transform-origin: left center;
+  transition: background-color .3s ease, transform .35s ease;
+}
+
+.project-dot.is-active {
+  background: var(--text);
+  transform: scaleX(1.2);
+}
+
+.project-stage {
+  position: relative;
+  min-height: 0;
+  perspective: 1600px;
+}
+
+.project-story .project {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  filter: blur(10px);
+  transform: translate3d(0, 8vh, -60px) scale(.965);
+  transform-origin: 50% 60%;
+  transition:
+    opacity .48s ease,
+    visibility .48s ease,
+    filter .55s ease,
+    transform .72s cubic-bezier(.2,.75,.2,1),
+    border-color .4s ease;
+  will-change: transform, opacity, filter;
+}
+
+.project-story .project.is-active {
+  z-index: 3;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+  border-color: rgba(255,255,255,.16);
+}
+
+.project-story .project.is-before {
+  z-index: 1;
+  transform: translate3d(0, -7vh, -90px) scale(.955);
+}
+
+.project-story .project.is-after {
+  z-index: 2;
+  transform: translate3d(0, 8vh, -60px) scale(.965);
+}
+
+.project-story .project-copy {
+  position: relative;
+  z-index: 3;
+}
+
+.project-story .project.is-active .project-copy > * {
+  animation: projectCopyIn .65s both cubic-bezier(.2,.75,.2,1);
+}
+
+.project-story .project.is-active .project-copy > :nth-child(2) { animation-delay: .035s; }
+.project-story .project.is-active .project-copy > :nth-child(3) { animation-delay: .07s; }
+.project-story .project.is-active .project-copy > :nth-child(4) { animation-delay: .105s; }
+.project-story .project.is-active .project-copy > :nth-child(5) { animation-delay: .14s; }
+
+@keyframes projectCopyIn {
+  from { opacity: 0; transform: translateY(1.1rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Each illustration continues moving while its card is pinned. */
+.project-story .terminal-window {
+  transform:
+    rotate(calc(-5deg + (var(--project-card-progress) * 4deg)))
+    translate3d(0, calc((.5 - var(--project-card-progress)) * 34px), 0)
+    scale(calc(.96 + (var(--project-card-progress) * .04)));
+  transition: box-shadow .2s linear;
+}
+
+.project-story .project.is-active .terminal-window {
+  box-shadow: 0 40px 110px rgba(0,0,0,.58), 0 0 70px rgba(255,107,74,.08);
+}
+
+.project-story .profiler-panel {
+  transform:
+    perspective(850px)
+    rotateY(calc(-11deg + (var(--project-card-progress) * 9deg)))
+    translateX(calc((.5 - var(--project-card-progress)) * 28px));
+}
+
+.project-story .profiler-row i {
+  transform-origin: left center;
+  transform: scaleX(calc(.58 + (var(--project-card-progress) * .42)));
+}
+
+.project-story .money-core {
+  transform: scale(calc(.92 + (var(--project-card-progress) * .08)));
+  box-shadow: 0 0 calc(55px + (var(--project-card-progress) * 65px)) rgba(121,216,155,.24);
+}
+
+.project-story .money-orbit-a {
+  transform: rotate(calc(var(--project-card-progress) * 120deg));
+}
+
+.project-story .money-orbit-b {
+  transform: rotate(calc(var(--project-card-progress) * -170deg));
+}
+
+.project-story .art-elavora svg {
+  transform: scale(calc(.96 + (var(--project-card-progress) * .04))) rotate(calc((var(--project-card-progress) - .5) * 1.5deg));
+}
+
+.project-story .art-elavora path {
+  stroke-dashoffset: calc(34px - (var(--project-card-progress) * 34px));
+}
+
+.project-story .node {
+  transition: transform .15s linear;
+}
+
+.project-story .node-a { transform: translateY(calc((.5 - var(--project-card-progress)) * 24px)); }
+.project-story .node-b { transform: translateX(calc((.5 - var(--project-card-progress)) * -28px)); }
+.project-story .node-c { transform: translateX(calc((.5 - var(--project-card-progress)) * 32px)); }
+.project-story .node-d { transform: translateY(calc((.5 - var(--project-card-progress)) * -22px)); }
+
+@media (max-width: 760px) {
+  .project-story { height: 580vh; }
+
+  .projects-sticky {
+    width: min(100% - 1.2rem, 1240px);
+    padding-top: 5.8rem;
+    padding-bottom: .7rem;
+    gap: .8rem;
+  }
+
+  .project-story-header {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: .8rem;
+  }
+
+  .project-story .section-heading .kicker { margin-bottom: .35rem; }
+  .project-story .section-heading h2 { font-size: clamp(2rem, 9.6vw, 3rem); }
+  .project-story-status { align-self: end; padding-bottom: .2rem; }
+  .project-dots { display: none; }
+
+  .project-story .project {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1.02fr) minmax(11.5rem, .98fr);
+    border-radius: 1.35rem;
+  }
+
+  .project-story .project-copy {
+    padding: 1.45rem 1.35rem 1rem;
+  }
+
+  .project-story .project-index { margin-bottom: .7rem; }
+  .project-story .project h3 { font-size: clamp(2rem, 10vw, 3.3rem); }
+  .project-story .project-copy > p:not(.project-index) { margin: .75rem 0 0; font-size: .9rem; }
+  .project-story .project-tags { margin: .75rem 0 .9rem; }
+  .project-story .project-tags span { padding: .33rem .5rem; font-size: .62rem; }
+  .project-story .project-art { min-height: 0; }
+  .project-story .text-link { font-size: .9rem; }
+}
+
+@media (max-height: 720px) and (min-width: 761px) {
+  .projects-sticky { padding-top: 5.6rem; gap: .7rem; }
+  .project-story .section-heading h2 { font-size: clamp(2.1rem, 4.2vw, 4rem); }
+  .project-story .project-copy { padding: clamp(1.5rem, 3.5vw, 3rem); }
+  .project-story .project h3 { font-size: clamp(2.2rem, 4.2vw, 4.2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-story {
+    width: min(1240px, calc(100% - 2rem));
+    height: auto !important;
+    margin: 0 auto;
+    padding: clamp(6rem, 12vw, 11rem) 0;
+  }
+
+  .projects-sticky {
+    position: static;
+    height: auto;
+    width: 100%;
+    padding: 0;
+    display: block;
+    overflow: visible;
+  }
+
+  .project-story-header { display: block; }
+  .project-story .section-heading { margin-bottom: clamp(3rem, 7vw, 6rem); }
+  .project-story-status { display: none; }
+  .project-stage { display: grid; gap: 2rem; }
+
+  .project-story .project {
+    position: relative;
+    inset: auto;
+    height: auto;
+    min-height: min(720px, 82svh);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+
+  .project-story .project-copy > *,
+  .project-story .project.is-active .project-copy > * {
+    animation: none;
+  }
+
+  .project-story .terminal-window,
+  .project-story .profiler-panel,
+  .project-story .profiler-row i,
+  .project-story .money-core,
+  .project-story .money-orbit-a,
+  .project-story .money-orbit-b,
+  .project-story .art-elavora svg,
+  .project-story .node {
+    transform: none;
+    transition: none;
+  }
+}
