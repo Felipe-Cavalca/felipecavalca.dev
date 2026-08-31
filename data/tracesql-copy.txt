@@ -1,2 +1,0 @@
-Dados de um ambiente para outro.
-CLI em Go para exportar dados SQL e facilitar a extração de informações de um ambiente quando você precisa trabalhar com esses dados em outro lugar.
