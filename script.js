@@ -12,6 +12,23 @@ const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)
 
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
+function applyCurrentProjectCopy() {
+  const traceSql = document.querySelector(".projects .project");
+  if (!traceSql) return;
+
+  const title = traceSql.querySelector("h3");
+  const description = traceSql.querySelector(".project-copy > p:not(.project-index)");
+  const terminalStatus = traceSql.querySelector(".terminal-muted");
+
+  if (title) title.textContent = "Dados de um ambiente para outro.";
+  if (description) {
+    description.textContent = "CLI em Go para exportar dados SQL e facilitar a extração de informações de um ambiente quando você precisa trabalhar com esses dados em outro lugar.";
+  }
+  if (terminalStatus) terminalStatus.textContent = "reading data…";
+}
+
+applyCurrentProjectCopy();
+
 function ensureProjectStoryStyles() {
   if (document.querySelector('link[data-project-story]')) return;
   const link = document.createElement("link");
