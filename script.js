@@ -1,150 +1,212 @@
+const root = document.documentElement;
 const yearEl = document.getElementById("year");
-if (yearEl) {
-  yearEl.textContent = String(new Date().getFullYear());
+const story = document.querySelector(".story");
+const storyLines = [...document.querySelectorAll("[data-story-line]")];
+const supportBtn = document.getElementById("support-btn");
+const supportModal = document.getElementById("support-modal");
+const supportClose = document.getElementById("support-close");
+const copyPixBtn = document.getElementById("copy-pix");
+const copyStatus = document.getElementById("copy-status");
+const PIX_KEY = "pix@felipecavalca.dev";
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+function applyCurrentProjectCopy() {
+  const traceSql = document.querySelector(".projects .project");
+  if (!traceSql) return;
+
+  const title = traceSql.querySelector("h3");
+  const description = traceSql.querySelector(".project-copy > p:not(.project-index)");
+  const terminalStatus = traceSql.querySelector(".terminal-muted");
+
+  if (title) title.textContent = "Dados de um ambiente para outro.";
+  if (description) {
+    description.textContent = "CLI em Go para exportar dados SQL e facilitar a extração de informações de um ambiente quando você precisa trabalhar com esses dados em outro lugar.";
+  }
+  if (terminalStatus) terminalStatus.textContent = "reading data…";
 }
 
+applyCurrentProjectCopy();
+
+function ensureProjectStoryStyles() {
+  if (document.querySelector('link[data-project-story]')) return;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "projects-story.css";
+  link.dataset.projectStory = "";
+  document.head.appendChild(link);
+}
+
+ensureProjectStoryStyles();
+
+const projects = document.querySelector(".projects");
+let projectCards = [];
+let projectDots = [];
+let projectCurrent = null;
+
+function setupProjectStory() {
+  if (!projects || prefersReducedMotion.matches) return;
+
+  const heading = projects.querySelector(".section-heading");
+  projectCards = [...projects.querySelectorAll(".project")];
+  if (!heading || projectCards.length === 0) return;
+
+  projects.classList.add("project-story");
+  projects.style.height = `${Math.max(500, projectCards.length * 115 + 80)}vh`;
+
+  heading.classList.remove("reveal", "visible");
+  projectCards.forEach((card, index) => {
+    card.classList.remove("reveal", "visible");
+    card.dataset.projectCard = String(index);
+    card.classList.toggle("is-active", index === 0);
+    card.classList.toggle("is-after", index > 0);
+    card.setAttribute("aria-hidden", index === 0 ? "false" : "true");
+  });
+
+  const sticky = document.createElement("div");
+  sticky.className = "projects-sticky";
+
+  const header = document.createElement("div");
+  header.className = "project-story-header";
+
+  const status = document.createElement("div");
+  status.className = "project-story-status";
+  status.setAttribute("aria-hidden", "true");
+
+  projectCurrent = document.createElement("strong");
+  projectCurrent.textContent = "01";
+
+  const separator = document.createElement("span");
+  separator.textContent = "/";
+
+  const total = document.createElement("span");
+  total.textContent = String(projectCards.length).padStart(2, "0");
+
+  const dots = document.createElement("div");
+  dots.className = "project-dots";
+
+  projectCards.forEach((_, index) => {
+    const dot = document.createElement("i");
+    dot.className = `project-dot${index === 0 ? " is-active" : ""}`;
+    dots.appendChild(dot);
+  });
+  projectDots = [...dots.children];
+
+  status.append(projectCurrent, separator, total, dots);
+  header.append(heading, status);
+
+  const stage = document.createElement("div");
+  stage.className = "project-stage";
+  projectCards.forEach(card => stage.appendChild(card));
+
+  sticky.append(header, stage);
+  projects.replaceChildren(sticky);
+}
+
+setupProjectStory();
+
 const reveals = document.querySelectorAll(".reveal");
-const observer = new IntersectionObserver(
+const revealObserver = new IntersectionObserver(
   entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
+        revealObserver.unobserve(entry.target);
       }
     });
   },
-  { threshold: 0.15 }
+  { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
 );
-reveals.forEach(node => observer.observe(node));
 
-const accentPalettes = {
-  light: [
-    {
-      shapeA: "#ff7b54",
-      shapeB: "#f59e0b",
-      gradA: "#ffd9ba",
-      gradB: "#ffd6d6"
-    },
-    {
-      shapeA: "#ef476f",
-      shapeB: "#f4a261",
-      gradA: "#ffd8e1",
-      gradB: "#ffe3c4"
-    },
-    {
-      shapeA: "#e76f51",
-      shapeB: "#2a9d8f",
-      gradA: "#ffd8cc",
-      gradB: "#d9f4ef"
-    },
-    {
-      shapeA: "#3a86ff",
-      shapeB: "#ffbe0b",
-      gradA: "#dbe9ff",
-      gradB: "#fff1c7"
-    }
-  ],
-  dark: [
-    {
-      shapeA: "#d85a4a",
-      shapeB: "#d68b2a",
-      gradA: "#1c2a3a",
-      gradB: "#2f1f31"
-    },
-    {
-      shapeA: "#c84f7a",
-      shapeB: "#c07a2b",
-      gradA: "#221a2f",
-      gradB: "#2f2218"
-    },
-    {
-      shapeA: "#4d7fd6",
-      shapeB: "#b6732c",
-      gradA: "#18273b",
-      gradB: "#2a2232"
-    },
-    {
-      shapeA: "#2f9c8f",
-      shapeB: "#cf6a4f",
-      gradA: "#152b2d",
-      gradB: "#2d1f28"
-    }
-  ]
-};
+reveals.forEach(node => revealObserver.observe(node));
 
-function applyRandomAccentPalette() {
-  const isDark = window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
-  const mode = isDark ? "dark" : "light";
-  const palettes = accentPalettes[mode];
-  const choice = palettes[Math.floor(Math.random() * palettes.length)];
-  const root = document.documentElement;
+let ticking = false;
 
-  root.style.setProperty("--shape-a", choice.shapeA);
-  root.style.setProperty("--shape-b", choice.shapeB);
-  root.style.setProperty("--bg-grad-a", choice.gradA);
-  root.style.setProperty("--bg-grad-b", choice.gradB);
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
 }
 
-applyRandomAccentPalette();
-
-const colorSchemeMedia = window.matchMedia?.("(prefers-color-scheme: dark)");
-if (colorSchemeMedia) {
-  const handleSchemeChange = () => {
-    applyRandomAccentPalette();
-  };
-
-  if (typeof colorSchemeMedia.addEventListener === "function") {
-    colorSchemeMedia.addEventListener("change", handleSchemeChange);
-  } else if (typeof colorSchemeMedia.addListener === "function") {
-    colorSchemeMedia.addListener(handleSchemeChange);
-  }
+function setProjectCardAccessibility(activeIndex) {
+  projectCards.forEach((card, cardIndex) => {
+    const active = cardIndex === activeIndex;
+    card.setAttribute("aria-hidden", active ? "false" : "true");
+    card.querySelectorAll("a, button, input, select, textarea").forEach(control => {
+      if (active) control.removeAttribute("tabindex");
+      else control.setAttribute("tabindex", "-1");
+    });
+  });
 }
 
-const PIX_KEY = "pix@felipecavalca.dev";
-const supportBtn = document.getElementById("support-btn");
-const supportModal = document.getElementById("support-modal");
-const supportClose = document.getElementById("support-close");
-const supportCopyText = document.querySelector(".support-copy");
+function updateProjects() {
+  if (!projects || projectCards.length === 0) return;
 
-function setSupportMessage(message) {
-  if (supportCopyText) {
-    supportCopyText.textContent = message;
-  }
+  const rect = projects.getBoundingClientRect();
+  const scrollable = Math.max(projects.offsetHeight - window.innerHeight, 1);
+  const passed = clamp(-rect.top, 0, scrollable);
+  const progress = clamp(passed / scrollable, 0, 1);
+  const scaled = progress * projectCards.length;
+  const activeIndex = Math.min(projectCards.length - 1, Math.floor(scaled));
+  const localProgress = activeIndex === projectCards.length - 1
+    ? clamp((progress - activeIndex / projectCards.length) * projectCards.length, 0, 1)
+    : clamp(scaled - activeIndex, 0, 1);
+
+  root.style.setProperty("--projects-progress", progress.toFixed(4));
+
+  projectCards.forEach((card, index) => {
+    const active = index === activeIndex;
+    card.classList.toggle("is-active", active);
+    card.classList.toggle("is-before", index < activeIndex);
+    card.classList.toggle("is-after", index > activeIndex);
+    card.style.setProperty("--project-card-progress", active ? localProgress.toFixed(4) : index < activeIndex ? "1" : "0");
+  });
+
+  setProjectCardAccessibility(activeIndex);
+
+  if (projectCurrent) projectCurrent.textContent = String(activeIndex + 1).padStart(2, "0");
+  projectDots.forEach((dot, index) => dot.classList.toggle("is-active", index === activeIndex));
 }
 
-async function copyPixKey() {
-  try {
-    if (navigator.clipboard?.writeText) {
-      await navigator.clipboard.writeText(PIX_KEY);
-      return true;
+function updateScrollScenes() {
+  const scrollY = window.scrollY || 0;
+  root.style.setProperty("--scroll-y", String(scrollY));
+
+  if (story) {
+    const rect = story.getBoundingClientRect();
+    const scrollable = Math.max(story.offsetHeight - window.innerHeight, 1);
+    const passed = clamp(-rect.top, 0, scrollable);
+    const progress = clamp(passed / scrollable, 0, 1);
+    root.style.setProperty("--story-progress", progress.toFixed(4));
+
+    if (storyLines.length) {
+      const index = Math.min(storyLines.length - 1, Math.floor(progress * storyLines.length));
+      storyLines.forEach((line, lineIndex) => {
+        line.classList.toggle("is-active", lineIndex === index);
+      });
     }
-  } catch (_error) {
-    // Fallback below.
   }
 
-  const temp = document.createElement("textarea");
-  temp.value = PIX_KEY;
-  temp.setAttribute("readonly", "");
-  temp.style.position = "absolute";
-  temp.style.left = "-9999px";
-  document.body.appendChild(temp);
-  temp.select();
-  const copied = document.execCommand("copy");
-  document.body.removeChild(temp);
-  return copied;
+  updateProjects();
+  ticking = false;
 }
 
-async function openSupportModal() {
+function requestScrollUpdate() {
+  if (ticking || prefersReducedMotion.matches) return;
+  ticking = true;
+  requestAnimationFrame(updateScrollScenes);
+}
+
+window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+window.addEventListener("resize", requestScrollUpdate, { passive: true });
+updateScrollScenes();
+
+function openSupportModal() {
   if (!supportModal) return;
   supportModal.classList.add("is-open");
   supportModal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-
-  const copied = await copyPixKey();
-  setSupportMessage(
-    copied
-      ? "A chave Pix ja foi copiada para sua area de transferencia."
-      : "Nao foi possivel copiar automaticamente. Use a chave abaixo."
-  );
+  if (copyStatus) copyStatus.textContent = "";
+  window.setTimeout(() => supportClose?.focus(), 0);
 }
 
 function closeSupportModal() {
@@ -152,65 +214,37 @@ function closeSupportModal() {
   supportModal.classList.remove("is-open");
   supportModal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
+  supportBtn?.focus();
 }
 
-if (supportBtn) {
-  supportBtn.addEventListener("click", () => {
-    openSupportModal();
-  });
-}
-
-if (supportClose) {
-  supportClose.addEventListener("click", () => {
-    closeSupportModal();
-  });
-}
-
-if (supportModal) {
-  supportModal.addEventListener("click", event => {
-    if (event.target === supportModal) {
-      closeSupportModal();
-    }
-  });
-}
-
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") {
-    closeSupportModal();
+async function copyPixKey() {
+  try {
+    await navigator.clipboard.writeText(PIX_KEY);
+    if (copyStatus) copyStatus.textContent = "Chave Pix copiada.";
+  } catch (_error) {
+    const textarea = document.createElement("textarea");
+    textarea.value = PIX_KEY;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+    const copied = document.execCommand("copy");
+    textarea.remove();
+    if (copyStatus) copyStatus.textContent = copied ? "Chave Pix copiada." : "Copie a chave exibida acima.";
   }
+}
+
+supportBtn?.addEventListener("click", openSupportModal);
+supportClose?.addEventListener("click", closeSupportModal);
+copyPixBtn?.addEventListener("click", copyPixKey);
+
+supportModal?.addEventListener("click", event => {
+  if (event.target === supportModal) closeSupportModal();
 });
 
-function flashSection(target) {
-  if (!target) return;
-  target.classList.remove("section-flash");
-  // Force reflow so repeated clicks retrigger the animation.
-  void target.offsetWidth;
-  target.classList.add("section-flash");
-  target.addEventListener(
-    "animationend",
-    () => {
-      target.classList.remove("section-flash");
-    },
-    { once: true }
-  );
-}
-
-const sectionButtons = document.querySelectorAll(".btn-section[href^='#']");
-sectionButtons.forEach(button => {
-  button.addEventListener("click", event => {
-    const href = button.getAttribute("href");
-    if (!href || href === "#") return;
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    event.preventDefault();
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.replaceState(null, "", href);
-
-    const distance = Math.abs(target.getBoundingClientRect().top);
-    const delay = Math.min(900, Math.max(280, distance * 0.35));
-    window.setTimeout(() => {
-      flashSection(target);
-    }, delay);
-  });
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape" && supportModal?.classList.contains("is-open")) {
+    closeSupportModal();
+  }
 });
