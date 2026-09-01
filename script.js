@@ -9,6 +9,7 @@ const copyPixBtn = document.getElementById("copy-pix");
 const copyStatus = document.getElementById("copy-status");
 const PIX_KEY = "pix@felipecavalca.dev";
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const compactViewport = window.matchMedia("(max-width: 620px)");
 
 if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
@@ -38,12 +39,31 @@ function ensureProjectStoryStyles() {
   document.head.appendChild(link);
 }
 
+function ensureMobileStyles() {
+  if (document.querySelector('link[data-mobile-layout]')) return;
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = "mobile.css";
+  link.media = "(max-width: 620px)";
+  link.dataset.mobileLayout = "";
+  document.head.appendChild(link);
+}
+
 ensureProjectStoryStyles();
+ensureMobileStyles();
 
 const projects = document.querySelector(".projects");
 let projectCards = [];
 let projectDots = [];
 let projectCurrent = null;
+
+function syncProjectStoryHeight() {
+  if (!projects || projectCards.length === 0 || prefersReducedMotion.matches) return;
+  const height = compactViewport.matches
+    ? projectCards.length * 95 + 70
+    : Math.max(500, projectCards.length * 115 + 80);
+  projects.style.height = `${height}vh`;
+}
 
 function setupProjectStory() {
   if (!projects || prefersReducedMotion.matches) return;
@@ -53,7 +73,7 @@ function setupProjectStory() {
   if (!heading || projectCards.length === 0) return;
 
   projects.classList.add("project-story");
-  projects.style.height = `${Math.max(500, projectCards.length * 115 + 80)}vh`;
+  syncProjectStoryHeight();
 
   heading.classList.remove("reveal", "visible");
   projectCards.forEach((card, index) => {
@@ -196,8 +216,14 @@ function requestScrollUpdate() {
   requestAnimationFrame(updateScrollScenes);
 }
 
+function handleResize() {
+  syncProjectStoryHeight();
+  requestScrollUpdate();
+}
+
 window.addEventListener("scroll", requestScrollUpdate, { passive: true });
-window.addEventListener("resize", requestScrollUpdate, { passive: true });
+window.addEventListener("resize", handleResize, { passive: true });
+compactViewport.addEventListener?.("change", handleResize);
 updateScrollScenes();
 
 function openSupportModal() {
